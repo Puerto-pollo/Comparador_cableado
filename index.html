@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="app-version" content="1.0.0">
+    <title>Comparador de Cableado</title>
+    <meta name="description" content="Aplicación que compara dos listas de cableado y muestra las diferencias">
+    <link rel="stylesheet" href="style.css">
+    <meta name="author" content="Jesús Pedrosa Soler">
+</head>
+
+<body>
+
+    <h1>Comparador de Listas de Cableado</h1>
+
+     <div class="carga-excel">
+
+        <div>
+            <label>Lista A</label>
+            <input type="file"
+                id="archivoA"
+                accept=".xlsx,.xls">
+        </div>
+
+        <div>
+            <label>Lista B</label>
+            <input type="file"
+                id="archivoB"
+                accept=".xlsx,.xls">
+        </div>
+
+    </div>
+
+    <button id="btnComparar">
+        Comparar Versiones
+    </button>
+
+    <button id="btnExportar">
+        Exportar Excel
+    </button>
+
+    <div id="resumen"></div>
+
+    <div class="filtros">
+
+        <button class="filtro activo" data-filtro="todos">
+            Todos
+        </button>
+
+        <button class="filtro" data-filtro="modificado">
+            Modificados
+        </button>
+
+        <button class="filtro" data-filtro="nuevo">
+            Nuevos
+        </button>
+
+        <button class="filtro" data-filtro="eliminado">
+            Eliminados
+        </button>
+
+        <button class="filtro" data-filtro="cambios">
+            Solo cambios
+        </button>
+
+    </div>
+
+    <div id="resultados"></div>
+    <footer id="versionFooter"></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+    
+</body>
+
+</html>
