@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<!-- saved from url=(0237)https://storage.abby.abb.com/abby/conversations/951545af-793a-4332-a811-3d32c021485d/output/video_formacion_comparador_cableado.html?se=2026-11-05T14%3A58%3A19Z&sp=r&sv=2025-07-05&sr=b&sig=yRVPKmg0jQEBnw8xTHbUMQ/JK4KYZW1b2ud%2BdVmnx9c%3D -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comparador de cableado · Vídeo formativo: compara dos listas en cuatro pasos</title>
+<meta name="description" content="Vídeo formativo HTML sobre el uso del Comparador de cableado">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#11181c;overflow:hidden;font-family:Arial,Helvetica,sans-serif}
+#viewport{position:fixed;inset:0;overflow:hidden}
+#stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;background:#eef1f3;overflow:hidden;color:#263238}
+#stage.idle{cursor:none}
+/* ---------- barra superior ---------- */
+.topbar{position:absolute;left:0;top:0;width:1920px;height:96px;background:#263238;color:#fff;display:flex;align-items:center;padding:0 80px;gap:28px;z-index:5}
+.topbar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:#FF000F}
+.tb-brand{display:flex;align-items:center;gap:16px;font-size:26px;font-weight:bold;white-space:nowrap}
+.tb-sep{width:2px;height:40px;background:rgba(255,255,255,.25)}
+#sceneTitle{font-size:28px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#e9eef0}
+.tb-steps{display:flex;gap:10px;align-items:center}
+.tb-steps span{width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:bold;color:rgba(255,255,255,.55);transition:all .4s}
+.tb-steps span.done{background:#455a64;border-color:#455a64;color:#fff}
+.tb-steps span.cur{background:#FF000F;border-color:#FF000F;color:#fff;transform:scale(1.1)}
+.tb-steps .lbl{width:auto;height:auto;border:none;font-size:20px;font-weight:normal;margin-right:4px;color:rgba(255,255,255,.7)}
+/* ---------- escenas ---------- */
+.scene{position:absolute;left:0;top:96px;width:1920px;height:764px;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility 0s linear .45s}
+.scene.active{opacity:1;visibility:visible;transition:opacity .45s ease}
+.fx{opacity:0;transform:translateY(26px);transition:opacity .5s ease,transform .5s ease}
+.fx.pop{transform:scale(.92)}
+.fx.lft{transform:translateX(-36px)}
+.fx.on{opacity:1;transform:none}
+.abs{position:absolute}
+.s-head{position:absolute;left:80px;top:26px;display:flex;align-items:center;gap:22px}
+.step-num{background:#FF000F;color:#fff;font-weight:bold;font-size:26px;padding:10px 18px;border-radius:6px;letter-spacing:2px}
+.step-title{font-size:48px;font-weight:bold;color:#263238}
+.h2{font-size:56px;font-weight:bold;color:#263238}
+.vcard{position:absolute;background:#fff;border-radius:14px;box-shadow:0 8px 28px rgba(38,50,56,.13);overflow:hidden}
+.vcard .bar{position:absolute;left:0;top:0;bottom:0;width:12px}
+.ico{flex:none}
+.on .ico,.ico.on{animation:icoIn .8s ease both}
+@keyframes icoIn{0%{transform:scale(.82)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
+.hl{outline:5px solid #FF000F!important;outline-offset:5px;border-radius:6px;animation:hlp 1.3s ease-in-out infinite}
+@keyframes hlp{0%,100%{outline-color:#FF000F}50%{outline-color:rgba(255,0,15,.35)}}
+.pulse{animation:pulse 1s ease-in-out 2}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+/* ---------- subtítulos ---------- */
+#subs{position:absolute;left:120px;right:120px;bottom:96px;display:flex;justify-content:center;pointer-events:none;z-index:6}
+#subText{background:rgba(17,24,28,.88);color:#fff;font-size:36px;line-height:1.32;padding:10px 26px;border-radius:8px;max-width:1560px;text-align:center;opacity:0;transition:opacity .2s}
+#subText.show{opacity:1}
+#stage.nosubs #subs{display:none}
+/* ---------- controles ---------- */
+#controls{position:absolute;left:0;right:0;bottom:0;height:84px;background:#1b2327;color:#fff;display:flex;align-items:center;gap:10px;padding:14px 40px 0;z-index:8;transition:opacity .4s}
+#stage.idle #controls{opacity:0;pointer-events:none}
+#progress{position:absolute;left:0;right:0;top:0;height:10px;background:#3a474d;cursor:pointer}
+#progress i{position:absolute;left:0;top:0;bottom:0;width:0;background:#FF000F}
+#progress b{position:absolute;top:0;bottom:0;width:2px;background:#1b2327}
+.cbtn{background:none;border:none;color:#fff;width:52px;height:52px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cbtn:hover,.cbtn:focus-visible{background:#33424a;outline:none}
+.cbtn svg{width:32px;height:32px;fill:#fff}
+.cbtn.off svg{opacity:.45}
+#time{font-size:22px;min-width:250px;color:#dfe6e9;margin-left:8px;white-space:nowrap}
+#sceneLbl{font-size:20px;color:#9fb0b7;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#voiceSel{background:#263238;color:#fff;border:1px solid #4b5b62;border-radius:6px;font-size:18px;height:42px;max-width:420px;padding:0 8px}
+/* ---------- capas ---------- */
+.overlay{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;background:rgba(17,24,28,.55)}
+.overlay.hidden{display:none}
+.ov-box{background:#fff;border-radius:18px;padding:56px 72px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.35);max-width:1100px}
+.ov-box h2{font-size:52px;margin-bottom:14px;color:#263238}
+.ov-box p{font-size:26px;color:#455a64;line-height:1.45;margin-bottom:10px}
+.ov-box .small{font-size:20px;color:#78909c}
+.bigbtn{margin:28px 0 22px;background:#FF000F;color:#fff;border:none;border-radius:50px;font-size:34px;font-weight:bold;padding:22px 56px;cursor:pointer;display:inline-flex;align-items:center;gap:16px}
+.bigbtn:hover{background:#d9000d}
+.bigbtn svg{width:36px;height:36px;fill:#fff}
+#toast{position:absolute;left:50%;top:120px;transform:translateX(-50%);background:#263238;color:#fff;font-size:24px;padding:14px 28px;border-radius:10px;z-index:30;opacity:0;transition:opacity .3s;pointer-events:none}
+#toast.show{opacity:1}
+/* ---------- portada ---------- */
+.cover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:90px;padding-bottom:40px}
+.cover .kicker{font-size:28px;color:#FF000F;font-weight:bold;letter-spacing:3px;text-transform:uppercase;margin-bottom:18px}
+.cover h1{font-size:96px;line-height:1.02;color:#263238;margin-bottom:22px}
+.cover p{font-size:44px;color:#455a64}
+/* ---------- navegador y app ---------- */
+.browser{position:absolute;background:#fff;border-radius:12px;box-shadow:0 10px 34px rgba(38,50,56,.18);overflow:hidden}
+.b-bar{height:48px;background:#dde2e5;display:flex;align-items:center;gap:14px;padding:0 16px}
+.b-dots{display:flex;gap:8px}.b-dots i{width:14px;height:14px;border-radius:50%;background:#b0bac0;display:block}
+.b-tab{background:#f5f5f5;border-radius:8px 8px 0 0;align-self:flex-end;height:38px;line-height:38px;padding:0 18px;font-size:17px;color:#333;white-space:nowrap}
+.b-url{flex:1;background:#fff;border-radius:16px;height:30px;line-height:30px;font-size:16px;color:#5f6b70;padding:0 14px;white-space:nowrap;overflow:hidden}
+.b-body{position:absolute;left:0;right:0;top:48px;bottom:0;background:#f5f5f5;overflow:hidden}
+.app{position:absolute;left:0;top:0;transform-origin:0 0;font-family:Arial,sans-serif;background:#f5f5f5;padding:25px;color:#000;font-size:16px;transition:transform .6s ease}
+.app h1{font-size:32px;margin:0 0 20px}
+.app .carga-excel>div{margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.app label{font-size:16px}
+.app .finput{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;border-radius:4px;padding:1px}
+.app .fbtn{border:1px solid #767676;border-radius:3px;background:#efefef;padding:2px 7px}
+.app .fname{color:#000}
+.app button{padding:10px 20px;margin:10px 0;cursor:pointer;font-size:14px;font-family:Arial,sans-serif;background:#efefef;border:1px solid #767676;border-radius:3px;color:#000;transition:filter .15s}
+.app .btns{display:flex;gap:4px;align-items:center}
+.app button.pressed{filter:brightness(.82)}
+.app .btn-plantilla{background-color:#4caf50;color:#fff}
+.app .summary-container{display:flex;gap:15px;margin-bottom:25px;flex-wrap:wrap}
+.app .card{min-width:120px;padding:15px;border-radius:8px;text-align:center;color:#fff;font-weight:bold}
+.app .card .numero{font-size:28px;display:block}
+.app .listaA{background:#607d8b}.app .listaB{background:#455a64}.app .nuevos{background:#1976d2}
+.app .eliminados{background:#d32f2f}.app .modificados{background:#f57c00}.app .iguales{background:#388e3c}
+.app table{width:100%;border-collapse:collapse;background:#fff}
+.app th{background:#263238;color:#fff;padding:12px;border:1px solid #ccc}
+.app td{padding:10px;border:1px solid #ddd;transition:opacity .4s}
+.app .fila-igual{background:#d4edda}.app .fila-nuevo{background:#cfe2ff}.app .fila-eliminado{background:#f8d7da}.app .fila-modificado{background:#fff3cd}
+.app .celda-cambio{background:#ffd54f;font-weight:bold}
+.app .valor-antiguo{color:#c62828;font-weight:bold;display:inline-block}
+.app .valor-nuevo{color:#2e7d32;font-weight:bold;display:inline-block}
+.app .estado{text-align:center;font-size:18px;font-weight:bold}
+.app .filtros{margin-bottom:15px}
+.app .filtro{padding:8px 15px;margin-right:5px;border:none;border-radius:5px}
+.app .filtro.activo{background:#263238;color:#fff}
+.app footer{margin-top:30px;padding:15px;text-align:center;color:#666;font-size:12px;border-top:1px solid #ddd}
+.app .js-res[data-focus] tr.r{opacity:.25}
+.app .js-res[data-focus="igual"] tr.fila-igual,.app .js-res[data-focus="modificado"] tr.fila-modificado,.app .js-res[data-focus="nuevo"] tr.fila-nuevo,.app .js-res[data-focus="eliminado"] tr.fila-eliminado{opacity:1}
+.app tr.r{transition:opacity .4s}
+.app tr.gone td{animation:gone .9s ease forwards}
+@keyframes gone{to{opacity:0;padding-top:0;padding-bottom:0;font-size:0;border-width:0}}
+.app .res-in{animation:resIn .45s ease both}
+@keyframes resIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* ---------- cursor ---------- */
+.cursor{position:absolute;left:1500px;top:700px;width:46px;height:46px;z-index:12;opacity:0;transition:left .8s cubic-bezier(.4,.1,.2,1),top .8s cubic-bezier(.4,.1,.2,1),opacity .3s;pointer-events:none}
+.cursor.show{opacity:1}
+.cursor::after{content:"";position:absolute;left:-18px;top:-18px;width:36px;height:36px;border-radius:50%;background:rgba(255,0,15,.35);transform:scale(0);opacity:0}
+.cursor.click::after{animation:ripple .5s ease-out}
+@keyframes ripple{0%{transform:scale(.2);opacity:1}100%{transform:scale(1.8);opacity:0}}
+/* ---------- Excel ---------- */
+.xl{position:absolute;background:#fff;border-radius:10px;box-shadow:0 12px 40px rgba(38,50,56,.22);overflow:hidden;display:flex;flex-direction:column;font-family:"Segoe UI",Arial,sans-serif}
+.xl-title{height:46px;background:#217346;color:#fff;display:flex;align-items:center;padding:0 16px;font-size:19px;gap:12px;white-space:nowrap;flex:none}
+.xl-title .tag{margin-left:auto;background:#fff;color:#217346;font-weight:bold;border-radius:20px;padding:4px 14px;font-size:17px}
+.xl-rib{height:36px;background:#f3f3f3;border-bottom:1px solid #ddd;display:flex;gap:26px;align-items:center;padding:0 18px;font-size:16px;color:#444;flex:none}
+.xl-fx{height:34px;border-bottom:1px solid #ddd;font-size:16px;display:flex;align-items:center;gap:14px;padding:0 12px;color:#555;flex:none}
+.xl-fx .nb{border:1px solid #ccc;padding:2px 10px;min-width:60px}
+.xl-grid{flex:1;overflow:hidden;position:relative}
+.xg{border-collapse:collapse;font-size:20px;table-layout:fixed}
+.xg th{background:#f0f0f0;color:#666;font-weight:normal;border:1px solid #d4d4d4;height:28px;font-size:15px}
+.xg td{border:1px solid #e1e1e1;height:42px;padding:0 10px;white-space:nowrap;overflow:hidden;color:#222}
+.xg td.rn{background:#f0f0f0;color:#777;text-align:center;font-size:15px;padding:0}
+.xg tr.hdr td:not(.rn){font-weight:bold}
+.xg .af{float:right;width:18px;height:18px;border:1px solid #999;border-radius:2px;margin-top:2px;background:#fff;position:relative}
+.xg .af::after{content:"";position:absolute;left:4px;top:6px;border:4px solid transparent;border-top:5px solid #555}
+.xg .chg{background:#ffd54f!important;font-weight:bold}
+.xl-tabs{height:42px;background:#f0f0f0;border-top:1px solid #ddd;display:flex;align-items:flex-end;padding-left:70px;gap:4px;flex:none}
+.xl-tab{background:#fff;padding:8px 18px;font-size:17px;border-bottom:3px solid #217346;color:#217346;font-weight:bold}
+.xrow{opacity:0;transition:opacity .35s}
+.xrow.on{opacity:1}
+/* ---------- tarjetas de leyenda / pasos ---------- */
+.lg{display:flex;align-items:center;gap:22px;padding:0 26px 0 36px}
+.lg .sw{width:74px;height:74px;border-radius:10px;flex:none;display:flex;align-items:center;justify-content:center;font-size:34px;border:2px solid rgba(0,0,0,.08)}
+.lg h3{font-size:32px;margin-bottom:6px}
+.lg p{font-size:24px;color:#455a64;line-height:1.25}
+.chip{display:inline-flex;align-items:center;gap:12px;background:#fff;border-radius:40px;padding:12px 26px;font-size:28px;font-weight:bold;box-shadow:0 4px 14px rgba(38,50,56,.12)}
+.colchip{position:absolute;left:0;width:600px;height:66px;background:#fff;border-radius:10px;box-shadow:0 4px 14px rgba(38,50,56,.1);display:flex;align-items:center;gap:18px;padding:0 22px;font-size:28px;font-weight:bold;letter-spacing:1px}
+.colchip i{font-style:normal;width:40px;height:40px;border-radius:8px;background:#217346;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px}
+.stepcard{position:absolute;top:150px;width:410px;height:480px;padding:40px 32px;text-align:center}
+.stepcard .n{position:absolute;left:24px;top:20px;font-size:30px;font-weight:bold;color:#FF000F}
+.stepcard h3{font-size:34px;line-height:1.2;margin:26px 0 14px}
+.stepcard p{font-size:25px;color:#455a64;line-height:1.35}
+.stepcard p.hlbg{background:#fff3cd;border-radius:6px}
+.mini{border-collapse:collapse;font-size:22px;width:100%}
+.mini th{background:#263238;color:#fff;padding:10px 8px;font-size:18px;letter-spacing:.5px}
+.mini td{border:1px solid #dde3e6;padding:11px 8px;white-space:nowrap}
+.scan .mini tbody tr{animation:scan .55s ease both}
+.scan .mini tbody tr:nth-child(2){animation-delay:.55s}.scan .mini tbody tr:nth-child(3){animation-delay:1.1s}
+.scan .mini tbody tr:nth-child(4){animation-delay:1.65s}.scan .mini tbody tr:nth-child(5){animation-delay:2.2s}
+@keyframes scan{0%,100%{background:transparent}40%{background:#ffe9a8}}
+.explorer{position:absolute;width:660px;background:#fff;border-radius:10px;box-shadow:0 18px 50px rgba(0,0,0,.3);overflow:hidden;z-index:11;font-family:"Segoe UI",Arial,sans-serif}
+.ex-bar{height:44px;background:#f3f3f3;display:flex;align-items:center;padding:0 18px;font-size:19px;border-bottom:1px solid #ddd}
+.ex-list{padding:14px 18px;display:flex;flex-direction:column;gap:6px}
+.ex-file{display:flex;align-items:center;gap:14px;font-size:22px;padding:10px 12px;border-radius:6px}
+.ex-file.sel{background:#cce4f7;outline:1px solid #99c9ef}
+.ex-foot{display:flex;justify-content:space-between;align-items:center;padding:12px 18px 18px;font-size:19px;border-top:1px solid #eee}
+.ex-btn{background:#0067c0;color:#fff;padding:8px 26px;border-radius:5px}
+.alertbox{width:660px;background:#fff;border-radius:12px;box-shadow:0 18px 50px rgba(0,0,0,.25);padding:30px 34px;font-size:24px;border:1px solid #ddd}
+.alertbox .t{font-weight:bold;margin-bottom:16px;font-size:22px;color:#333}
+.alertbox .m{margin-bottom:26px;color:#111}
+.alertbox .b{display:flex;justify-content:flex-end}
+.alertbox .b span{background:#0b57d0;color:#fff;border-radius:20px;padding:8px 28px;font-size:20px}
+.dlbubble{position:absolute;background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.22);display:flex;align-items:center;gap:16px;padding:16px 20px;font-size:21px;z-index:10}
+.dlbubble small{display:block;font-size:17px;color:#6b7a80;margin-top:4px}
+.tagnote{position:absolute;height:48px;display:flex;align-items:center;gap:12px;padding:0 20px;border-radius:24px;background:#263238;color:#fff;font-size:23px;white-space:nowrap}
+.tagnote b{color:#ffd54f}
+#endOverlay .ov-box{padding:50px 80px}
+</style>
+</head>
+<body>
+<div id="viewport">
+<div id="stage" style="transform: translate(0px, 92.3438px) scale(0.706771);">
+  <header class="topbar">
+    <div class="tb-brand"><svg width="44" height="44" viewBox="0 0 48 48"><rect x="3" y="6" width="18" height="24" rx="3" fill="#90a4ae"></rect><rect x="27" y="6" width="18" height="24" rx="3" fill="#cfd8dc"></rect><path d="M12 34v4h24v-4" stroke="#FF000F" stroke-width="3.5" fill="none" stroke-linecap="round"></path><circle cx="24" cy="41" r="3.5" fill="#FF000F"></circle></svg><span>Comparador de cableado</span></div>
+    <div class="tb-sep"></div>
+    <div id="sceneTitle">Comparador de cableado</div>
+    <div class="tb-steps"><span class="lbl">Pasos</span><span data-s="1">1</span><span data-s="2">2</span><span data-s="3">3</span><span data-s="4">4</span></div>
+  </header>
+  <main id="scenes">
+<section class="scene active" id="sc0" data-dirty="1"><div class="cover"><div><svg width="560" height="420" viewBox="0 0 560 420"><rect x="20" y="30" width="120" height="160" rx="10" fill="#fff" stroke="#b0bec5" stroke-width="3"></rect><rect x="20" y="30" width="120" height="28" rx="10" fill="#607d8b"></rect><rect x="20" y="46" width="120" height="12" fill="#607d8b"></rect><text x="80" y="52" text-anchor="middle" font-size="20" font-weight="bold" fill="#fff" font-family="Arial">A</text><rect x="32" y="70" width="96" height="14" rx="3" fill="#e0e6e9"></rect><rect x="32" y="92" width="96" height="14" rx="3" fill="#e0e6e9"></rect><rect x="32" y="114" width="96" height="14" rx="3" fill="#e0e6e9"></rect><rect x="32" y="136" width="96" height="14" rx="3" fill="#e0e6e9"></rect><rect x="32" y="158" width="96" height="14" rx="3" fill="#e0e6e9"></rect><rect x="20" y="230" width="120" height="160" rx="10" fill="#fff" stroke="#b0bec5" stroke-width="3"></rect><rect x="20" y="230" width="120" height="28" rx="10" fill="#455a64"></rect><rect x="20" y="246" width="120" height="12" fill="#455a64"></rect><text x="80" y="252" text-anchor="middle" font-size="20" font-weight="bold" fill="#fff" font-family="Arial">B</text><rect x="32" y="270" width="96" height="14" rx="3" fill="#e0e6e9"></rect><rect x="32" y="292" width="96" height="14" rx="3" fill="#e0e6e9"></rect><rect x="32" y="314" width="96" height="14" rx="3" fill="#e0e6e9"></rect><rect x="32" y="336" width="96" height="14" rx="3" fill="#e0e6e9"></rect><rect x="32" y="358" width="96" height="14" rx="3" fill="#e0e6e9"></rect><path d="M160 110 C230 110 230 210 290 210 M160 310 C230 310 230 210 290 210" stroke="#FF000F" stroke-width="6" fill="none" stroke-linecap="round"></path><path d="M286 196l18 14-18 14" stroke="#FF000F" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><g transform="translate(320,90) scale(1.5)"><rect x="0" y="0" width="120" height="160" rx="10" fill="#fff" stroke="#b0bec5" stroke-width="3"></rect><rect x="0" y="0" width="120" height="28" rx="10" fill="#263238"></rect><rect x="0" y="16" width="120" height="12" fill="#263238"></rect><text x="60" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#fff" font-family="Arial">A → B</text><rect x="12" y="40" width="96" height="14" rx="3" fill="#d4edda"></rect><rect x="12" y="62" width="96" height="14" rx="3" fill="#fff3cd"></rect><rect x="12" y="84" width="96" height="14" rx="3" fill="#d4edda"></rect><rect x="12" y="106" width="96" height="14" rx="3" fill="#cfe2ff"></rect><rect x="12" y="128" width="96" height="14" rx="3" fill="#f8d7da"></rect></g></svg></div><div><div class="kicker">Vídeo formativo</div><h1>Comparador<br>de cableado</h1><p>Compara dos listas en cuatro pasos</p></div></div></section>
+<section class="scene" id="sc1"><div class="s-head fx lft" id="s1h"><span class="h2">¿Qué ha cambiado?</span></div>
+<div class="fx" id="s1lists" style="position:absolute;left:80px;top:150px;width:1760px;height:500px">
+ <div class="vcard" style="left:0;top:0;width:820px;padding:24px 26px 26px"><div style="font-size:28px;font-weight:bold;margin-bottom:16px;color:#607d8b">Lista de cableado · versión antigua</div><table class="mini"><thead><tr><th>ORIGEN</th><th>DESTINO</th><th>TIPO</th><th>COLOR</th><th>SECCION</th></tr></thead><tbody><tr><td>X1:1</td><td>Y1:A1</td><td>H07V-K</td><td>Negro</td><td>1,5 mm²</td></tr><tr><td>X1:2</td><td>Y1:A2</td><td>H07V-K</td><td>Azul</td><td>1,5 mm²</td></tr><tr><td>X1:3</td><td>Y2:1</td><td>H07V-K</td><td>Marrón</td><td>2,5 mm²</td></tr><tr><td>X1:4</td><td>Y2:3</td><td>H07V-K</td><td>Negro</td><td>2,5 mm²</td></tr><tr><td>X1:5</td><td>Y3:U1</td><td>H07V-K</td><td>Gris</td><td>2,5 mm²</td></tr></tbody></table></div>
+ <div class="vcard" style="left:940px;top:0;width:820px;padding:24px 26px 26px"><div style="font-size:28px;font-weight:bold;margin-bottom:16px;color:#455a64">Lista de cableado · versión nueva</div><table class="mini"><thead><tr><th>ORIGEN</th><th>DESTINO</th><th>TIPO</th><th>COLOR</th><th>SECCION</th></tr></thead><tbody><tr><td>X1:1</td><td>Y1:A1</td><td>H07V-K</td><td>Negro</td><td>1,5 mm²</td></tr><tr><td>X1:2</td><td>Y1:A2</td><td>H07V-K</td><td>Azul</td><td>1,5 mm²</td></tr><tr><td>X1:3</td><td>Y2:1</td><td>H07V-K</td><td>Marrón</td><td>1,5 mm²</td></tr><tr><td>X1:4</td><td>Y2:3</td><td>H07V-K</td><td>Negro</td><td>2,5 mm²</td></tr><tr><td>X1:6</td><td>Y3:V1</td><td>H07V-K</td><td>Gris</td><td>2,5 mm²</td></tr></tbody></table></div>
+ <div style="position:absolute;left:836px;top:200px;width:88px;height:88px;border-radius:50%;background:#263238;color:#fff;font-size:46px;font-weight:bold;display:flex;align-items:center;justify-content:center">?</div>
+</div>
+<div class="fx pop" id="s1miss" style="position:absolute;left:600px;top:660px;width:720px;height:84px;display:flex;align-items:center;justify-content:center;gap:18px;background:#fff;border-radius:42px;box-shadow:0 6px 20px rgba(38,50,56,.15);font-size:32px;font-weight:bold"><svg class="ico" width="52" height="52" viewBox="0 0 64 64"><path d="M32 6L60 56H4z" fill="#ffc107" stroke="#263238" stroke-width="3" stroke-linejoin="round"></path><rect x="29" y="22" width="6" height="18" rx="3" fill="#263238"></rect><circle cx="32" cy="47" r="3.6" fill="#263238"></circle></svg><span>Fila a fila: lento y con riesgo de error</span></div></section>
+<section class="scene" id="sc2"><div class="browser" id="s2app" style="left:80px;top:30px;width:1080px;height:470px"><div class="b-bar"><span class="b-dots"><i></i><i></i><i></i></span><span class="b-tab">Comparador de Cableado</span><span class="b-url">puerto-pollo.github.io/Comparador_cableado/</span></div><div class="b-body"></div></div>
+<div class="vcard lg fx lft" id="s2c1" style="left:1230px;top:30px;width:610px;height:140px"><span class="bar" style="background:#f57c00"></span><span class="sw ico" style="background:#fff3cd"><svg class="ico" width="80" height="80" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#fff3cd" stroke="#f57c00" stroke-width="3"></circle><text x="13" y="40" font-size="20" font-weight="bold" fill="#c62828" font-family="Arial">a</text><path d="M26 33h12m-4-5l5 5-5 5" stroke="#263238" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><text x="41" y="40" font-size="20" font-weight="bold" fill="#2e7d32" font-family="Arial">b</text></svg></span><div><h3>Modificados</h3><p>Qué cables se han modificado</p></div></div>
+<div class="vcard lg fx lft" id="s2c2" style="left:1230px;top:195px;width:610px;height:140px"><span class="bar" style="background:#1976d2"></span><span class="sw ico" style="background:#cfe2ff"><svg class="ico" width="80" height="80" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#cfe2ff" stroke="#1976d2" stroke-width="3"></circle><path d="M32 18v28M18 32h28" stroke="#1976d2" stroke-width="6" stroke-linecap="round"></path></svg></span><div><h3>Nuevos</h3><p>Cuáles son nuevos</p></div></div>
+<div class="vcard lg fx lft" id="s2c3" style="left:1230px;top:360px;width:610px;height:140px"><span class="bar" style="background:#d32f2f"></span><span class="sw ico" style="background:#f8d7da"><svg class="ico" width="80" height="80" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#f8d7da" stroke="#d32f2f" stroke-width="3"></circle><path d="M18 32h28" stroke="#d32f2f" stroke-width="6" stroke-linecap="round"></path></svg></span><div><h3>Eliminados</h3><p>Cuáles se han eliminado</p></div></div>
+<div class="fx" id="s2steps" style="position:absolute;left:80px;top:560px;width:1760px;height:130px;display:flex;gap:24px">
+ <div class="vcard" style="position:relative;flex:1;display:flex;align-items:center;gap:20px;padding:0 26px"><span style="width:62px;height:62px;border-radius:50%;background:#FF000F;color:#fff;font-size:32px;font-weight:bold;display:flex;align-items:center;justify-content:center;flex:none">1</span><span style="font-size:27px;font-weight:bold;line-height:1.2">Descargar y rellenar la plantilla</span></div><div class="vcard" style="position:relative;flex:1;display:flex;align-items:center;gap:20px;padding:0 26px"><span style="width:62px;height:62px;border-radius:50%;background:#FF000F;color:#fff;font-size:32px;font-weight:bold;display:flex;align-items:center;justify-content:center;flex:none">2</span><span style="font-size:27px;font-weight:bold;line-height:1.2">Cargar Lista A y Lista B</span></div><div class="vcard" style="position:relative;flex:1;display:flex;align-items:center;gap:20px;padding:0 26px"><span style="width:62px;height:62px;border-radius:50%;background:#FF000F;color:#fff;font-size:32px;font-weight:bold;display:flex;align-items:center;justify-content:center;flex:none">3</span><span style="font-size:27px;font-weight:bold;line-height:1.2">Comparar e interpretar</span></div><div class="vcard" style="position:relative;flex:1;display:flex;align-items:center;gap:20px;padding:0 26px"><span style="width:62px;height:62px;border-radius:50%;background:#FF000F;color:#fff;font-size:32px;font-weight:bold;display:flex;align-items:center;justify-content:center;flex:none">4</span><span style="font-size:27px;font-weight:bold;line-height:1.2">Exportar a Excel</span></div>
+</div></section>
+<section class="scene" id="sc3"><div class="s-head fx lft" id="s3h"><span class="step-num">PASO 1</span><span class="step-title">Descargar y rellenar la plantilla</span></div>
+<div class="browser" id="s3app" style="left:80px;top:140px;width:1080px;height:560px"><div class="b-bar"><span class="b-dots"><i></i><i></i><i></i></span><span class="b-tab">Comparador de Cableado</span><span class="b-url">puerto-pollo.github.io/Comparador_cableado/</span></div><div class="b-body"></div></div>
+<div class="vcard fx lft" id="s3dl" style="left:1240px;top:140px;width:600px;height:120px;display:flex;align-items:center;gap:22px;padding:0 26px"><svg class="ico" width="68" height="68" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="7" fill="#217346"></rect><path d="M15 14l18 20M33 14L15 34" stroke="#fff" stroke-width="5" stroke-linecap="round"></path></svg><div><div style="font-size:27px;font-weight:bold">template_wiring_compare.xlsx</div><div style="font-size:23px;color:#607d8b;margin-top:6px">Archivo Excel · cinco columnas</div></div></div>
+<div style="position:absolute;left:1240px;top:290px;width:600px;height:420px"><div class="colchip fx lft" id="s3c0" style="top:0px"><i>A</i>ORIGEN</div><div class="colchip fx lft" id="s3c1" style="top:82px"><i>B</i>DESTINO</div><div class="colchip fx lft" id="s3c2" style="top:164px"><i>C</i>TIPO</div><div class="colchip fx lft" id="s3c3" style="top:246px"><i>D</i>COLOR</div><div class="colchip fx lft" id="s3c4" style="top:328px"><i>E</i>SECCION</div></div>
+<div class="xl fx pop" id="s3xl" style="left:300px;top:120px;width:1320px;height:600px;z-index:9"></div>
+<div class="cursor"><svg width="46" height="46" viewBox="0 0 24 24"><path d="M3 2l15 9.5-6.5 1.3 3.8 7.4-2.8 1.4-3.8-7.4L3 19z" fill="#111" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"></path></svg></div></section>
+<section class="scene" id="sc4"><div class="xl" id="s4xl" style="left:80px;top:30px;width:1120px;height:700px"></div>
+<div class="tagnote fx pop" id="s4tag" style="left:840px;top:44px;z-index:3;background:#607d8b">Versión antigua</div>
+<div class="tagnote fx pop" id="s4save" style="left:470px;top:650px;z-index:3">✓ Guardada en tu equipo</div>
+<div class="vcard fx lft" id="s4a" style="left:1270px;top:90px;width:570px;height:250px;padding:30px 34px"><span class="bar" style="background:#607d8b"></span><div style="display:flex;align-items:center;gap:22px"><svg class="ico" width="80" height="80" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="7" fill="#217346"></rect><path d="M15 14l18 20M33 14L15 34" stroke="#fff" stroke-width="5" stroke-linecap="round"></path></svg><div><div style="font-size:44px;font-weight:bold">Lista A</div><div style="font-size:27px;color:#455a64;margin-top:8px">Versión antigua</div></div></div><div style="margin-top:26px;font-size:23px;color:#607d8b">Plantilla rellena y guardada</div></div>
+<div class="vcard fx lft" id="s4b" style="left:1270px;top:390px;width:570px;height:250px;padding:30px 34px"><span class="bar" style="background:#455a64"></span><div style="display:flex;align-items:center;gap:22px"><svg class="ico" width="80" height="80" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="7" fill="#217346"></rect><path d="M15 14l18 20M33 14L15 34" stroke="#fff" stroke-width="5" stroke-linecap="round"></path></svg><div><div style="font-size:44px;font-weight:bold">Lista B</div><div style="font-size:27px;color:#455a64;margin-top:8px">Versión nueva</div></div></div><div style="margin-top:26px;font-size:23px;color:#607d8b">Plantilla rellena y guardada</div></div></section>
+<section class="scene" id="sc5"><div class="vcard fx" id="s5ban" style="left:80px;top:30px;width:1760px;height:150px;display:flex;align-items:center;gap:34px;padding:0 44px;background:#fff8e1"><span class="bar" style="background:#ffc107"></span><svg class="ico" width="96" height="96" viewBox="0 0 64 64"><path d="M32 6L60 56H4z" fill="#ffc107" stroke="#263238" stroke-width="3" stroke-linejoin="round"></path><rect x="29" y="22" width="6" height="18" rx="3" fill="#263238"></rect><circle cx="32" cy="47" r="3.6" fill="#263238"></circle></svg><div><div style="font-size:44px;font-weight:bold">Mantén exactamente el formato de la plantilla original</div><div style="font-size:28px;color:#455a64;margin-top:8px">En las dos listas: A y B</div></div></div>
+<div class="vcard fx" id="s5c0" style="left:80px;top:230px;width:560px;height:440px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding:30px;text-align:center"><svg class="ico" width="190" height="150" viewBox="0 0 190 150"><rect x="10" y="30" width="170" height="34" rx="4" fill="#263238"></rect><g fill="#fff"><rect x="18" y="43" width="26" height="8" rx="2"></rect><rect x="52" y="43" width="26" height="8" rx="2"></rect><rect x="86" y="43" width="26" height="8" rx="2"></rect><rect x="120" y="43" width="26" height="8" rx="2"></rect><rect x="154" y="43" width="18" height="8" rx="2"></rect></g><rect x="10" y="70" width="170" height="16" rx="3" fill="#e0e6e9"></rect><rect x="10" y="92" width="170" height="16" rx="3" fill="#e0e6e9"></rect><circle cx="150" cy="104" r="30" fill="#fff" stroke="#d32f2f" stroke-width="6"></circle><path d="M129 125l42-42" stroke="#d32f2f" stroke-width="6"></path><path d="M140 112l18-18 6 6-18 18h-6z" fill="#455a64"></path></svg><div style="font-size:38px;font-weight:bold;line-height:1.2">No cambies<br>los encabezados</div></div><div class="vcard fx" id="s5c1" style="left:680px;top:230px;width:560px;height:440px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding:30px;text-align:center"><svg class="ico" width="190" height="150" viewBox="0 0 190 150"><rect x="10" y="20" width="170" height="80" rx="4" fill="#fff" stroke="#b0bec5" stroke-width="3"></rect><rect x="10" y="100" width="170" height="26" fill="#eceff1"></rect><rect x="22" y="100" width="62" height="22" fill="#fff" stroke="#217346" stroke-width="3"></rect><rect x="90" y="100" width="44" height="22" fill="#fff" stroke="#b0bec5" stroke-width="2" stroke-dasharray="4 3"></rect><path d="M112 104v14M105 111h14" stroke="#90a4ae" stroke-width="3"></path><circle cx="150" cy="66" r="30" fill="#fff" stroke="#d32f2f" stroke-width="6"></circle><path d="M129 87l42-42" stroke="#d32f2f" stroke-width="6"></path><path d="M150 54v24M138 66h24" stroke="#455a64" stroke-width="5"></path></svg><div style="font-size:38px;font-weight:bold;line-height:1.2">No añadas hojas</div></div><div class="vcard fx" id="s5c2" style="left:1280px;top:230px;width:560px;height:440px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding:30px;text-align:center"><svg class="ico" width="190" height="150" viewBox="0 0 190 150"><g fill="#e0e6e9"><rect x="10" y="22" width="40" height="104" rx="3"></rect><rect x="56" y="22" width="40" height="104" rx="3"></rect><rect x="102" y="22" width="40" height="104" rx="3"></rect></g><rect x="10" y="22" width="132" height="20" rx="3" fill="#263238"></rect><circle cx="150" cy="88" r="30" fill="#fff" stroke="#d32f2f" stroke-width="6"></circle><path d="M129 109l42-42" stroke="#d32f2f" stroke-width="6"></path><path d="M138 82h24m-6-6l6 6-6 6M162 96h-24m6-6l-6 6 6 6" stroke="#455a64" stroke-width="3.5" fill="none" stroke-linecap="round"></path></svg><div style="font-size:38px;font-weight:bold;line-height:1.2">No modifiques<br>su estructura</div></div></section>
+<section class="scene" id="sc6"><div class="xl fx" id="s6xl" style="left:80px;top:30px;width:1040px;height:660px"></div>
+<div class="tagnote fx pop" id="s6first" style="left:110px;top:700px;background:#217346">▲ Lee la primera hoja</div>
+<div class="tagnote fx pop" id="s6cols" style="left:430px;top:700px;background:#217346">✓ Busca las cinco columnas</div>
+<div class="fx pop" id="s6alert" style="position:absolute;left:1180px;top:60px"><div class="alertbox" style="width:660px"><div class="t">Esta página dice</div><div class="m">El Excel A no contiene las columnas requeridas</div><div class="b"><span>Aceptar</span></div></div></div>
+<div class="vcard fx" id="s6no" style="left:1180px;top:360px;width:660px;height:220px;display:flex;align-items:center;gap:30px;padding:0 40px"><span class="bar" style="background:#d32f2f"></span><svg class="ico" width="110" height="110" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#f8d7da" stroke="#d32f2f" stroke-width="3"></circle><path d="M18 32h28" stroke="#d32f2f" stroke-width="6" stroke-linecap="round"></path></svg><div><div style="font-size:36px;font-weight:bold">No hay comparación</div><div style="font-size:26px;color:#455a64;margin-top:10px">Hasta que el formato sea el de la plantilla</div></div></div></section>
+<section class="scene" id="sc7"><div class="s-head fx lft" id="s7h"><span class="step-num">PASO 2</span><span class="step-title">Cargar la lista A y la lista B</span></div>
+<div class="browser" id="s7app" style="left:80px;top:140px;width:1180px;height:560px"><div class="b-bar"><span class="b-dots"><i></i><i></i><i></i></span><span class="b-tab">Comparador de Cableado</span><span class="b-url">puerto-pollo.github.io/Comparador_cableado/</span></div><div class="b-body"></div></div>
+<div class="explorer fx pop" id="s7exp" style="left:420px;top:330px"><div class="ex-bar">Abrir</div><div class="ex-list"><div class="ex-file" data-f="A"><svg class="ico" width="30" height="30" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="7" fill="#217346"></rect><path d="M15 14l18 20M33 14L15 34" stroke="#fff" stroke-width="5" stroke-linecap="round"></path></svg> lista_A.xlsx</div><div class="ex-file" data-f="B"><svg class="ico" width="30" height="30" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="7" fill="#217346"></rect><path d="M15 14l18 20M33 14L15 34" stroke="#fff" stroke-width="5" stroke-linecap="round"></path></svg> lista_B.xlsx</div></div><div class="ex-foot"><span>Nombre: <b class="ex-n"></b></span><span class="ex-btn">Abrir</span></div></div>
+<div class="vcard fx lft" id="s7ord" style="left:1320px;top:140px;width:520px;height:560px;padding:34px 36px"><span class="bar" style="background:#FF000F"></span>
+ <div style="font-size:36px;font-weight:bold;margin-bottom:24px">Respeta el orden</div>
+ <div style="display:flex;align-items:center;gap:18px;font-size:28px;margin-bottom:16px"><span style="background:#607d8b;color:#fff;font-weight:bold;border-radius:8px;padding:8px 16px">Lista A</span>versión antigua</div>
+ <div style="display:flex;align-items:center;gap:18px;font-size:28px;margin-bottom:34px"><span style="background:#455a64;color:#fff;font-weight:bold;border-radius:8px;padding:8px 16px">Lista B</span>versión nueva</div>
+ <div style="font-size:24px;color:#455a64;margin-bottom:18px">De este orden depende que un cable aparezca como:</div>
+ <div style="display:flex;gap:14px"><span class="chip" style="background:#cfe2ff;box-shadow:none">Nuevo</span><span class="chip" style="background:#f8d7da;box-shadow:none">Eliminado</span></div></div>
+<div class="cursor"><svg width="46" height="46" viewBox="0 0 24 24"><path d="M3 2l15 9.5-6.5 1.3 3.8 7.4-2.8 1.4-3.8-7.4L3 19z" fill="#111" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"></path></svg></div></section>
+<section class="scene" id="sc8"><div class="s-head fx lft" id="s8h"><span class="step-num">PASO 3</span><span class="step-title">Comparar e interpretar el resultado</span></div>
+<div class="browser" id="s8app" style="left:80px;top:128px;width:1760px;height:630px"><div class="b-bar"><span class="b-dots"><i></i><i></i><i></i></span><span class="b-tab">Comparador de Cableado</span><span class="b-url">puerto-pollo.github.io/Comparador_cableado/</span></div><div class="b-body"></div></div>
+<div class="cursor"><svg width="46" height="46" viewBox="0 0 24 24"><path d="M3 2l15 9.5-6.5 1.3 3.8 7.4-2.8 1.4-3.8-7.4L3 19z" fill="#111" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"></path></svg></div></section>
+<section class="scene" id="sc9"><div class="browser" id="s9app" style="left:80px;top:20px;width:1140px;height:740px"><div class="b-bar"><span class="b-dots"><i></i><i></i><i></i></span><span class="b-tab">Comparador de Cableado</span><span class="b-url">puerto-pollo.github.io/Comparador_cableado/</span></div><div class="b-body"></div></div>
+<div class="vcard lg fx lft" id="s9g" style="left:1260px;top:20px;width:580px;height:128px"><span class="bar" style="background:#388e3c"></span><span class="sw ico" style="background:#d4edda">✅</span><div><h3>Verde claro</h3><p>Siguen igual</p></div></div>
+<div class="vcard lg fx lft" id="s9y" style="left:1260px;top:163px;width:580px;height:150px"><span class="bar" style="background:#f57c00"></span><span class="sw ico" style="background:#fff3cd">⚠️</span><div><h3>Amarillo · modificados</h3><p>Mismo origen y destino; otro tipo, color o sección</p></div></div>
+<div class="vcard fx lft" id="s9call" style="left:1260px;top:328px;width:580px;height:140px;padding:20px 30px"><span class="bar" style="background:#ffd54f"></span><div style="font-size:22px;color:#455a64;margin-bottom:12px">Celda que ha cambiado: valor antiguo → nuevo</div><div style="font-size:42px;font-weight:bold;background:#ffd54f;display:inline-block;padding:4px 16px;border-radius:6px"><span id="s9old" style="color:#c62828;display:inline-block">2.5 MM²</span> <span id="s9arr" style="display:inline-block">→</span> <span id="s9new" style="color:#2e7d32;display:inline-block">1.5 MM²</span></div></div>
+<div class="vcard lg fx lft" id="s9b" style="left:1260px;top:483px;width:580px;height:128px"><span class="bar" style="background:#1976d2"></span><span class="sw ico" style="background:#cfe2ff">➕</span><div><h3>Azul · nuevos</h3><p>Solo están en la lista B</p></div></div>
+<div class="vcard lg fx lft" id="s9r" style="left:1260px;top:626px;width:580px;height:128px"><span class="bar" style="background:#d32f2f"></span><span class="sw ico" style="background:#f8d7da">❌</span><div><h3>Rojo · eliminados</h3><p>Solo están en la lista A</p></div></div></section>
+<section class="scene" id="sc10"><div class="browser" id="s10app" style="left:80px;top:20px;width:1240px;height:740px"><div class="b-bar"><span class="b-dots"><i></i><i></i><i></i></span><span class="b-tab">Comparador de Cableado</span><span class="b-url">puerto-pollo.github.io/Comparador_cableado/</span></div><div class="b-body"></div></div>
+<div class="vcard fx lft" id="s10note" style="left:1370px;top:120px;width:470px;height:430px;padding:36px 36px"><span class="bar" style="background:#263238"></span>
+<div style="display:inline-block;background:#263238;color:#fff;border-radius:6px;padding:10px 20px;font-size:30px;font-weight:bold;margin-bottom:30px">Solo cambios</div>
+<div style="display:flex;gap:16px;align-items:center;font-size:28px;margin-bottom:22px"><span style="width:28px;height:28px;border-radius:5px;background:#fff3cd;border:1px solid #ddd"></span><span style="width:28px;height:28px;border-radius:5px;background:#cfe2ff;border:1px solid #ddd"></span><span style="width:28px;height:28px;border-radius:5px;background:#f8d7da;border:1px solid #ddd"></span>Muestra todas las diferencias</div>
+<div style="display:flex;gap:16px;align-items:center;font-size:28px"><span style="width:28px;height:28px;border-radius:5px;background:#d4edda;border:1px solid #ddd;position:relative;overflow:hidden"><i style="position:absolute;left:-4px;top:12px;width:40px;height:4px;background:#d32f2f;transform:rotate(-45deg)"></i></span>Oculta los que siguen igual</div></div></section>
+<section class="scene" id="sc11"><div class="s-head fx lft" id="s11h"><span class="step-num">PASO 4</span><span class="step-title">Exportar a Excel</span></div>
+<div class="browser" id="s11app" style="left:80px;top:140px;width:860px;height:570px"><div class="b-bar"><span class="b-dots"><i></i><i></i><i></i></span><span class="b-tab">Comparador de Cableado</span><span class="b-url">puerto-pollo.github.io/Comparador_cableado/</span></div><div class="b-body"></div></div>
+<div class="dlbubble fx pop" id="s11dl" style="left:420px;top:200px;width:500px"><svg class="ico" width="52" height="52" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="7" fill="#217346"></rect><path d="M15 14l18 20M33 14L15 34" stroke="#fff" stroke-width="5" stroke-linecap="round"></path></svg><div><div style="font-size:19px;font-weight:bold;word-break:break-all">Comparativa_Cableado_AAAA-MM-DD_hh-mm-ss.xlsx</div><small>Descarga completada</small></div></div>
+<div class="xl fx pop" id="s11xl" style="left:980px;top:140px;width:860px;height:570px"></div>
+<div class="tagnote fx pop" id="s11tagA" style="left:80px;top:716px">Filtro en pantalla: <b>Modificados</b></div>
+<div class="tagnote fx pop" id="s11tagB" style="left:980px;top:716px;background:#217346">Excel: <b style="color:#fff">comparativa completa</b>&nbsp;·&nbsp;<span id="s11todos">como «Todos»</span></div>
+<div class="cursor"><svg width="46" height="46" viewBox="0 0 24 24"><path d="M3 2l15 9.5-6.5 1.3 3.8 7.4-2.8 1.4-3.8-7.4L3 19z" fill="#111" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"></path></svg></div></section>
+<section class="scene" id="sc12"><div class="s-head fx lft" id="s12h"><span class="h2">En resumen</span></div><div class="vcard stepcard fx" id="s12c0" style="left:80px"><span class="bar" style="width:100%;height:10px;bottom:auto;background:#FF000F"></span><span class="n">1</span><svg class="ico" width="150" height="150" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#e8f5e9"></circle><path d="M32 14v24m-10-10l10 10 10-10" stroke="#388e3c" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18 44v5h28v-5" stroke="#388e3c" stroke-width="5" fill="none" stroke-linecap="round"></path></svg><h3>Descarga y rellena la plantilla</h3><p>Una por versión, sin alterar su formato</p></div><div class="vcard stepcard fx" id="s12c1" style="left:530px"><span class="bar" style="width:100%;height:10px;bottom:auto;background:#FF000F"></span><span class="n">2</span><svg class="ico" width="150" height="150" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#eceff1"></circle><text x="13" y="30" font-size="15" font-weight="bold" fill="#607d8b" font-family="Arial">A</text><text x="41" y="30" font-size="15" font-weight="bold" fill="#455a64" font-family="Arial">B</text><path d="M32 48V26m-9 9l9-9 9 9" stroke="#455a64" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg><h3>Carga las listas</h3><p>Antigua como Lista A<br>Nueva como Lista B</p></div><div class="vcard stepcard fx" id="s12c2" style="left:980px"><span class="bar" style="width:100%;height:10px;bottom:auto;background:#FF000F"></span><span class="n">3</span><svg class="ico" width="150" height="150" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#fff3cd"></circle><rect x="14" y="17" width="36" height="7" rx="2" fill="#d4edda"></rect><rect x="14" y="27" width="36" height="7" rx="2" fill="#ffd54f"></rect><rect x="14" y="37" width="36" height="7" rx="2" fill="#cfe2ff"></rect><rect x="14" y="47" width="36" height="5" rx="2" fill="#f8d7da"></rect></svg><h3>Compara y filtra</h3><p>Comparar versiones<br><span id="s12f">Filtra los cambios</span></p></div><div class="vcard stepcard fx" id="s12c3" style="left:1430px"><span class="bar" style="width:100%;height:10px;bottom:auto;background:#FF000F"></span><span class="n">4</span><svg class="ico" width="150" height="150" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#e8f5e9"></circle><rect x="15" y="16" width="26" height="32" rx="4" fill="#217346"></rect><path d="M22 25l12 14M34 25L22 39" stroke="#fff" stroke-width="3.5" stroke-linecap="round"></path><path d="M40 32h12m-5-5l5 5-5 5" stroke="#263238" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg><h3>Exporta el resultado</h3><p>Exportar Excel</p></div></section>
+  </main>
+  <div id="subs"><span id="subText"></span></div>
+  <div id="controls">
+    <div id="progress" title="Ir a la escena"><i style="width: 0%;"></i><b style="left: 1.32591%;"></b><b style="left: 7.32757%;"></b><b style="left: 15.4328%;"></b><b style="left: 21.9843%;"></b><b style="left: 30.3844%;"></b><b style="left: 36.3332%;"></b><b style="left: 41.1611%;"></b><b style="left: 52.0553%;"></b><b style="left: 55.284%;"></b><b style="left: 74.4459%;"></b><b style="left: 81.595%;"></b><b style="left: 92.1625%;"></b></div>
+    <button class="cbtn" id="bRestart" title="Reiniciar (R)"><svg viewBox="0 0 24 24"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"></path></svg></button>
+    <button class="cbtn" id="bPrev" title="Escena anterior (←)"><svg viewBox="0 0 24 24"><path d="M6 5h2v14H6zM20 5v14L9 12z"></path></svg></button>
+    <button class="cbtn" id="bPlay" title="Reproducir (espacio)"><svg viewBox="0 0 24 24"><path d="M7 4v16l13-8z"></path></svg></button>
+    <button class="cbtn" id="bNext" title="Escena siguiente (→)"><svg viewBox="0 0 24 24"><path d="M16 5h2v14h-2zM4 5v14l11-7z"></path></svg></button>
+    <span id="time">0:00 / 4:01 (estimado)</span>
+    <span id="sceneLbl">1 / 13 · Comparador de cableado</span>
+    <button class="cbtn" id="bCC" title="Subtítulos (C)"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3zm2 2v10h14V7zm2 3h4v1.5H8.5v1h2.5V14H7zm6 0h4v1.5h-2.5v1H17V14h-4z"></path></svg></button>
+    <select id="voiceSel" title="Voz de la locución"><option value="Microsoft Elvira Online (Natural) - Spanish (Spain)">Microsoft Elvira Online (Natural) - Spanish (Spain) (es-ES)</option><option value="Microsoft Álvaro Online (Natural) - Spanish (Spain)">Microsoft Álvaro Online (Natural) - Spanish (Spain) (es-ES)</option><option value="Microsoft Ximena Online (Natural) - Spanish (Spain)">Microsoft Ximena Online (Natural) - Spanish (Spain) (es-ES)</option><option value="Microsoft Elena Online (Natural) - Spanish (Argentina)">Microsoft Elena Online (Natural) - Spanish (Argentina) (es-AR)</option><option value="Microsoft Tomas Online (Natural) - Spanish (Argentina)">Microsoft Tomas Online (Natural) - Spanish (Argentina) (es-AR)</option><option value="Microsoft Sofia Online (Natural) - Spanish (Bolivia)">Microsoft Sofia Online (Natural) - Spanish (Bolivia) (es-BO)</option><option value="Microsoft Marcelo Online (Natural) - Spanish (Bolivia)">Microsoft Marcelo Online (Natural) - Spanish (Bolivia) (es-BO)</option><option value="Microsoft Catalina Online (Natural) - Spanish (Chile)">Microsoft Catalina Online (Natural) - Spanish (Chile) (es-CL)</option><option value="Microsoft Lorenzo Online (Natural) - Spanish (Chile)">Microsoft Lorenzo Online (Natural) - Spanish (Chile) (es-CL)</option><option value="Microsoft Salome Online (Natural) - Spanish (Colombia)">Microsoft Salome Online (Natural) - Spanish (Colombia) (es-CO)</option><option value="Microsoft Gonzalo Online (Natural) - Spanish (Colombia)">Microsoft Gonzalo Online (Natural) - Spanish (Colombia) (es-CO)</option><option value="Microsoft María Online (Natural) - Spanish (Costa Rica)">Microsoft María Online (Natural) - Spanish (Costa Rica) (es-CR)</option><option value="Microsoft Juan Online (Natural) - Spanish (Costa Rica)">Microsoft Juan Online (Natural) - Spanish (Costa Rica) (es-CR)</option><option value="Microsoft Belkys Online (Natural) - Spanish (Cuba)">Microsoft Belkys Online (Natural) - Spanish (Cuba) (es-CU)</option><option value="Microsoft Manuel Online (Natural) - Spanish (Cuba)">Microsoft Manuel Online (Natural) - Spanish (Cuba) (es-CU)</option><option value="Microsoft Ramona Online (Natural) - Spanish (Dominican Republic)">Microsoft Ramona Online (Natural) - Spanish (Dominican Republic) (es-DO)</option><option value="Microsoft Emilio Online (Natural) - Spanish (Dominican Republic)">Microsoft Emilio Online (Natural) - Spanish (Dominican Republic) (es-DO)</option><option value="Microsoft Andrea Online (Natural) - Spanish (Ecuador)">Microsoft Andrea Online (Natural) - Spanish (Ecuador) (es-EC)</option><option value="Microsoft Luis Online (Natural) - Spanish (Ecuador)">Microsoft Luis Online (Natural) - Spanish (Ecuador) (es-EC)</option><option value="Microsoft Teresa Online (Natural) - Spanish (Equatorial Guinea)">Microsoft Teresa Online (Natural) - Spanish (Equatorial Guinea) (es-GQ)</option><option value="Microsoft Javier Online (Natural) - Spanish (Equatorial Guinea)">Microsoft Javier Online (Natural) - Spanish (Equatorial Guinea) (es-GQ)</option><option value="Microsoft Marta Online (Natural) - Spanish (Guatemala)">Microsoft Marta Online (Natural) - Spanish (Guatemala) (es-GT)</option><option value="Microsoft Andrés Online (Natural) - Spanish (Guatemala)">Microsoft Andrés Online (Natural) - Spanish (Guatemala) (es-GT)</option><option value="Microsoft Karla Online (Natural) - Spanish (Honduras)">Microsoft Karla Online (Natural) - Spanish (Honduras) (es-HN)</option><option value="Microsoft Carlos Online (Natural) - Spanish (Honduras)">Microsoft Carlos Online (Natural) - Spanish (Honduras) (es-HN)</option><option value="Microsoft Dalia Online (Natural) - Spanish (Mexico)">Microsoft Dalia Online (Natural) - Spanish (Mexico) (es-MX)</option><option value="Microsoft Jorge Online (Natural) - Spanish (Mexico)">Microsoft Jorge Online (Natural) - Spanish (Mexico) (es-MX)</option><option value="Microsoft Yolanda Online (Natural) - Spanish (Nicaragua)">Microsoft Yolanda Online (Natural) - Spanish (Nicaragua) (es-NI)</option><option value="Microsoft Federico Online (Natural) - Spanish (Nicaragua)">Microsoft Federico Online (Natural) - Spanish (Nicaragua) (es-NI)</option><option value="Microsoft Margarita Online (Natural) - Spanish (Panama)">Microsoft Margarita Online (Natural) - Spanish (Panama) (es-PA)</option><option value="Microsoft Roberto Online (Natural) - Spanish (Panama)">Microsoft Roberto Online (Natural) - Spanish (Panama) (es-PA)</option><option value="Microsoft Camila Online (Natural) - Spanish (Peru)">Microsoft Camila Online (Natural) - Spanish (Peru) (es-PE)</option><option value="Microsoft Alex Online (Natural) - Spanish (Peru)">Microsoft Alex Online (Natural) - Spanish (Peru) (es-PE)</option><option value="Microsoft Karina Online (Natural) - Spanish (Puerto Rico)">Microsoft Karina Online (Natural) - Spanish (Puerto Rico) (es-PR)</option><option value="Microsoft Víctor Online (Natural) - Spanish (Puerto Rico)">Microsoft Víctor Online (Natural) - Spanish (Puerto Rico) (es-PR)</option><option value="Microsoft Tania Online (Natural) - Spanish (Paraguay)">Microsoft Tania Online (Natural) - Spanish (Paraguay) (es-PY)</option><option value="Microsoft Mario Online (Natural) - Spanish (Paraguay)">Microsoft Mario Online (Natural) - Spanish (Paraguay) (es-PY)</option><option value="Microsoft Lorena Online (Natural) - Spanish (El Salvador)">Microsoft Lorena Online (Natural) - Spanish (El Salvador) (es-SV)</option><option value="Microsoft Rodrigo Online (Natural) - Spanish (El Salvador)">Microsoft Rodrigo Online (Natural) - Spanish (El Salvador) (es-SV)</option><option value="Microsoft Paloma Online (Natural) - Spanish (United States)">Microsoft Paloma Online (Natural) - Spanish (United States) (es-US)</option><option value="Microsoft Alonso Online (Natural) - Spanish (United States)">Microsoft Alonso Online (Natural) - Spanish (United States) (es-US)</option><option value="Microsoft Valentina Online (Natural) - Spanish (Uruguay)">Microsoft Valentina Online (Natural) - Spanish (Uruguay) (es-UY)</option><option value="Microsoft Mateo Online (Natural) - Spanish (Uruguay)">Microsoft Mateo Online (Natural) - Spanish (Uruguay) (es-UY)</option><option value="Microsoft Paola Online (Natural) - Spanish (Venezuela)">Microsoft Paola Online (Natural) - Spanish (Venezuela) (es-VE)</option><option value="Microsoft Sebastián Online (Natural) - Spanish (Venezuela)">Microsoft Sebastián Online (Natural) - Spanish (Venezuela) (es-VE)</option><option value="__none">Sin voz (solo subtítulos)</option></select>
+    <button class="cbtn" id="bFS" title="Pantalla completa (F)"><svg viewBox="0 0 24 24"><path d="M4 4h6v2H6v4H4zm10 0h6v6h-2V6h-4zM4 14h2v4h4v2H4zm14 0h2v6h-6v-2h4z"></path></svg></button>
+  </div>
+  <div class="overlay" id="startOverlay">
+    <div class="ov-box">
+      <h2>Comparador de cableado</h2>
+      <p>Compara dos listas en cuatro pasos</p>
+      <button class="bigbtn" id="bStart"><svg viewBox="0 0 24 24"><path d="M7 4v16l13-8z"></path></svg>Iniciar vídeo</button>
+      <p class="small" id="voiceInfo">Voz en español detectada: Microsoft Elvira Online (Natural) - Spanish (Spain)</p>
+      <p class="small">Duración estimada: <span id="estDur">4:01</span> · Espacio: reproducir/pausa · ← →: escenas · R: reiniciar · C: subtítulos · F: pantalla completa</p>
+    </div>
+  </div>
+  <div class="overlay hidden" id="endOverlay">
+    <div class="ov-box">
+      <h2>Fin del vídeo</h2>
+      <p>Comparador de cableado: compara dos listas en cuatro pasos</p>
+      <button class="bigbtn" id="bAgain"><svg viewBox="0 0 24 24"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"></path></svg>Volver a ver</button>
+    </div>
+  </div>
+  <div id="toast"></div>
+</div>
+</div>
+<script>
+(function(){
+'use strict';
+/* ====================================================================
+   DATOS DE DEMOSTRACIÓN (ilustrativos) Y RÉPLICA VISUAL DE LA APP
+   ==================================================================== */
+const ROWS=[
+ {e:'igual',o:'X1:1',d:'Y1:A1',t:'H07V-K',c:'NEGRO',s:'1.5 MM²'},
+ {e:'igual',o:'X1:2',d:'Y1:A2',t:'H07V-K',c:'AZUL',s:'1.5 MM²'},
+ {e:'modificado',o:'X1:3',d:'Y2:1',t:'H07V-K',c:'MARRÓN',s:['2.5 MM²','1.5 MM²']},
+ {e:'igual',o:'X1:4',d:'Y2:3',t:'H07V-K',c:'NEGRO',s:'2.5 MM²'},
+ {e:'eliminado',o:'X1:5',d:'Y3:U1',t:'H07V-K',c:'GRIS',s:'2.5 MM²'},
+ {e:'nuevo',o:'X1:6',d:'Y3:V1',t:'H07V-K',c:'GRIS',s:'2.5 MM²'}
+];
+const ICON={igual:'✅',nuevo:'➕',eliminado:'❌',modificado:'⚠️'};
+const LISTA_A=[['X1:1','Y1:A1','H07V-K','Negro','1,5 mm²'],['X1:2','Y1:A2','H07V-K','Azul','1,5 mm²'],['X1:3','Y2:1','H07V-K','Marrón','2,5 mm²'],['X1:4','Y2:3','H07V-K','Negro','2,5 mm²'],['X1:5','Y3:U1','H07V-K','Gris','2,5 mm²']];
+
+function cell(v){
+  if(Array.isArray(v)) return '<td class="celda-cambio"><span class="valor-antiguo">'+v[0]+'</span> → <span class="valor-nuevo">'+v[1]+'</span></td>';
+  return '<td>'+v+'</td>';
+}
+function tableHTML(filtro){
+  let rows=ROWS;
+  if(filtro==='cambios') rows=ROWS.filter(r=>r.e!=='igual');
+  else if(filtro && filtro!=='todos') rows=ROWS.filter(r=>r.e===filtro);
+  let h='<table><thead><tr><th>Estado</th><th>Origen</th><th>Destino</th><th>Tipo</th><th>Color</th><th>Sección</th></tr></thead><tbody>';
+  rows.forEach(r=>{h+='<tr class="r fila-'+r.e+'"><td class="estado">'+ICON[r.e]+'</td><td>'+r.o+'</td><td>'+r.d+'</td><td>'+r.t+'</td><td>'+r.c+'</td>'+cell(r.s)+'</tr>';});
+  return h+'</tbody></table>';
+}
+function summaryHTML(){
+  const c=(k,n,l)=>'<div class="card '+k+'"><span class="numero">'+n+'</span>'+l+'</div>';
+  return '<div class="summary-container">'+c('listaA',5,'Lista A')+c('listaB',5,'Lista B')+c('nuevos',1,'Nuevos')+c('eliminados',1,'Eliminados')+c('modificados',1,'Modificados')+c('iguales',3,'Sin cambios')+'</div>';
+}
+function appHTML(o){
+  o=o||{};
+  const f=['todos','modificado','nuevo','eliminado','cambios'], fl=['Todos','Modificados','Nuevos','Eliminados','Solo cambios'];
+  const act=o.filter||'todos';
+  const fin=(n,id)=>'<div><label>Lista '+n+'</label> <span class="finput js-file'+n+'"><span class="fbtn">Seleccionar archivo</span><span class="fname">'+(o['file'+n]||'Ningún archivo seleccionado')+'</span></span></div>';
+  return '<div class="app" style="width:'+(o.w||1000)+'px">'+
+   '<h1>Comparador de Listas de Cableado</h1>'+
+   '<div class="carga-excel">'+fin('A')+fin('B')+'</div>'+
+   '<div class="btns"><button class="btn-plantilla js-tpl">📄 Descargar plantilla</button><button class="js-cmp">Comparar Versiones</button><button class="js-exp">Exportar Excel</button></div>'+
+   '<div class="js-sum'+(o.hideRes?' fx':'')+'">'+(o.results?summaryHTML():'')+'</div>'+
+   '<div class="filtros js-filters">'+f.map((k,i)=>'<button class="filtro'+(k===act?' activo':'')+'" data-f="'+k+'">'+fl[i]+'</button>').join('')+'</div>'+
+   '<div class="js-res'+(o.hideRes?' fx':'')+'">'+(o.results?tableHTML(act):'')+'</div>'+
+   (o.footer===false?'':'<footer>Comparador de Cableado</footer>')+
+   '</div>';
+}
+function mountApp(browserEl,o){
+  const body=browserEl.querySelector('.b-body');
+  body.innerHTML=appHTML(o);
+  fitApp(browserEl,o);
+  return body.querySelector('.app');
+}
+function fitApp(browserEl,o){
+  o=o||{};
+  const body=browserEl.querySelector('.b-body'), app=body.querySelector('.app');
+  const bw=body.clientWidth, bh=body.clientHeight;
+  let top=0;
+  if(o.from){ const t=app.querySelector(o.from); top=t.offsetTop-12; }
+  const natH=app.offsetHeight-top, natW=app.offsetWidth;
+  let s=Math.min(bw/natW,bh/natH); if(o.maxScale) s=Math.min(s,o.maxScale);
+  const x=Math.max(0,(bw-natW*s)/2);
+  app.style.transform='translate('+x+'px,'+(-top*s)+'px) scale('+s+')';
+}
+function excelHTML(o){
+  const cols=o.cols, letters='ABCDEFGH';
+  let h='<div class="xl-title">'+XLICON+'<span>'+o.file+' - Excel</span></div>'+
+    '<div class="xl-rib"><span>Archivo</span><span><b>Inicio</b></span><span>Insertar</span><span>Fórmulas</span><span>Datos</span><span>Vista</span></div>'+
+    '<div class="xl-fx"><span class="nb">A1</span><i>fx</i><span>'+cols[0]+'</span></div><div class="xl-grid"><table class="xg"><colgroup><col style="width:44px">'+
+    o.widths.map(w=>'<col style="width:'+w+'px">').join('')+'</colgroup><tr><th></th>'+cols.map((c,i)=>'<th>'+letters[i]+'</th>').join('')+'</tr>'+
+    '<tr class="hdr"><td class="rn">1</td>'+cols.map((c,i)=>'<td class="xh" data-i="'+i+'">'+c+(o.autofilter?'<span class="af"></span>':'')+'</td>').join('')+'</tr>';
+  const n=Math.max(o.rows.length,o.minRows||0);
+  for(let r=0;r<n;r++){
+    const row=o.rows[r], bg=row&&o.bg?' style="background:'+o.bg[r]+'"':'';
+    h+='<tr class="'+(row&&o.hideRows?'xrow':'')+'"'+bg+'><td class="rn">'+(r+2)+'</td>';
+    for(let i=0;i<cols.length;i++){
+      const v=row?row[i]:''; const chg=o.chg&&o.chg[r]===i;
+      h+='<td'+(chg?' class="chg"':'')+'>'+(v||'')+'</td>';
+    }
+    h+='</tr>';
+  }
+  return h+'</table></div><div class="xl-tabs"><span class="xl-tab">'+o.sheet+'</span></div>';
+}
+const XLICON='<svg width="26" height="26" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="7" fill="#fff"/><path d="M15 14l18 20M33 14L15 34" stroke="#217346" stroke-width="5" stroke-linecap="round"/></svg>';
+const TPL_COLS=['ORIGEN','DESTINO','TIPO','COLOR','SECCION'];
+const EXP_ROWS=ROWS.map(r=>[r.e==='igual'?'SIN CAMBIOS':r.e.toUpperCase(),r.o,r.d,r.t,r.c,Array.isArray(r.s)?r.s[0]+' → '+r.s[1]:r.s]);
+const EXP_BG=ROWS.map(r=>({igual:'#d4edda',nuevo:'#cfe2ff',eliminado:'#f8d7da',modificado:'#fff3cd'})[r.e]);
+
+/* ====================================================================
+   DICCIONARIO DE PRONUNCIACIÓN (solo afecta a la voz)
+   ==================================================================== */
+const PRON=[
+  [/(^|[^\d])2,5(?![\d])/g,'$1dos coma cinco'],
+  [/(^|[^\d])1,5(?![\d])/g,'$1uno coma cinco']
+];
+function toVoice(t){ let v=t; PRON.forEach(p=>{v=v.replace(p[0],p[1]);}); return v; }
+
+/* ====================================================================
+   UTILIDADES DE ESCENA
+   ==================================================================== */
+let ROOT=null;
+const q=s=>ROOT.querySelector(s);
+const qa=s=>Array.from(ROOT.querySelectorAll(s));
+const on=(...ids)=>ids.forEach(id=>{const e=q(id);if(e)e.classList.add('on');});
+const off=(...ids)=>ids.forEach(id=>{const e=q(id);if(e)e.classList.remove('on');});
+let vTimers=[];
+function later(fn,ms){const t=setTimeout(()=>{vTimers=vTimers.filter(x=>x!==t);fn();},ms);vTimers.push(t);return t;}
+function clearVisualTimers(){vTimers.forEach(clearTimeout);vTimers=[];}
+let STAGE_SCALE=1;
+function rel(el){const r=el.getBoundingClientRect(),R=ROOT.getBoundingClientRect();return{x:(r.left-R.left)/STAGE_SCALE,y:(r.top-R.top)/STAGE_SCALE,w:r.width/STAGE_SCALE,h:r.height/STAGE_SCALE};}
+function cursorTo(el,click,cb){
+  const c=q('.cursor'); if(!c||!el) return;
+  const p=rel(el); c.classList.add('show');
+  c.style.left=(p.x+p.w*0.55)+'px'; c.style.top=(p.y+p.h*0.55)+'px';
+  if(click) later(()=>{c.classList.add('click');el.classList.add('pressed');later(()=>{c.classList.remove('click');el.classList.remove('pressed');if(cb)cb();},380);},820);
+}
+function hl(el,state){ if(el) el.classList.toggle('hl',state!==false); }
+function pulse(el){ if(!el)return; el.classList.remove('pulse'); void el.offsetWidth; el.classList.add('pulse'); }
+function setFilter(app,f,animateGone){
+  app.querySelectorAll('.filtro').forEach(b=>b.classList.toggle('activo',b.dataset.f===f));
+  const res=app.querySelector('.js-res');
+  if(animateGone && f==='cambios'){
+    res.innerHTML=tableHTML('todos');
+    res.querySelectorAll('tr.fila-igual').forEach(tr=>tr.classList.add('gone'));
+    later(()=>{res.innerHTML=tableHTML('cambios');},950);
+  } else {
+    res.innerHTML=tableHTML(f);
+    res.querySelector('tbody').classList.add('res-in');
+  }
+}
+
+/* ====================================================================
+   ESCENAS Y LOCUCIÓN
+   t = texto original (subtítulos) · la voz se obtiene con toVoice(t)
+   k = disparadores: [palabra clave en el texto de voz | 0, acción]
+   ==================================================================== */
+const EMPH={rate:0.94,pitch:0.96};
+const SCENES=[
+ {title:'Comparador de cableado',step:0,hold:3200,cues:[]},
+ {title:'Qué hace la aplicación',step:0,cues:[
+   {t:'¿Tienes dos versiones de una misma lista de cableado y necesitas saber qué ha cambiado?',k:[[0,()=>on('#s1h')],['dos versiones',()=>on('#s1lists')]]},
+   {t:'Revisarlas fila a fila lleva tiempo y es fácil que se escape algún cambio.',k:[['fila a fila',()=>q('#s1lists').classList.add('scan')],['se escape',()=>on('#s1miss')]]}
+ ]},
+ {title:'Qué hace la aplicación',step:0,init:()=>mountApp(q('#s2app'),{}),cues:[
+   {t:'El Comparador de cableado es una aplicación web que compara las dos listas y te muestra sus diferencias: qué cables se han modificado, cuáles son nuevos y cuáles se han eliminado.',
+    k:[['modificado',()=>on('#s2c1')],['nuevos',()=>on('#s2c2')],['eliminado',()=>on('#s2c3')]]},
+   {t:'En este vídeo verás cómo usarla en cuatro pasos.',k:[['cuatro pasos',()=>on('#s2steps')]]}
+ ]},
+ {title:'Paso 1 · Descargar la plantilla',step:1,init:()=>{mountApp(q('#s3app'),{w:760});q('#s3xl').innerHTML=excelHTML({file:'template_wiring_compare.xlsx',sheet:'ABB_CONNECTION_LIST',cols:TPL_COLS,widths:[230,230,230,230,230],rows:[],minRows:9});},cues:[
+   {t:'Primer paso: preparar las listas.',k:[[0,()=>on('#s3h')]]},
+   {t:'En la aplicación, pulsa el botón Descargar plantilla.',k:[['pulsa',()=>cursorTo(q('#s3app .js-tpl'),false)],['descargar plantilla',()=>{const b=q('#s3app .js-tpl');hl(b);cursorTo(b,true);}]]},
+   {t:'Se descargará un archivo Excel con cinco columnas: origen, destino, tipo, color y sección.',
+    k:[[0,()=>{hl(q('#s3app .js-tpl'),false);on('#s3dl');}],['origen',()=>on('#s3c0')],['destino',()=>on('#s3c1')],['tipo',()=>on('#s3c2')],['color',()=>on('#s3c3')],['sección',()=>on('#s3c4')]],
+    pause:2000,onPause:()=>{q('.cursor').classList.remove('show');on('#s3xl');}}
+ ]},
+ {title:'Paso 1 · Rellenar la plantilla',step:1,init:()=>{q('#s4xl').innerHTML=excelHTML({file:'template_wiring_compare.xlsx',sheet:'ABB_CONNECTION_LIST',cols:TPL_COLS,widths:[200,200,190,200,220],rows:LISTA_A,hideRows:true,minRows:11});},cues:[
+   {t:'Rellena la plantilla con la versión antigua de la lista, un cable por fila debajo de los encabezados, y guárdala en tu equipo.',
+    k:[['versión antigua',()=>on('#s4tag')],['un cable por fila',()=>qa('#s4xl .xrow').forEach((r,i)=>later(()=>r.classList.add('on'),i*380))],['guárdala',()=>on('#s4save')]]},
+   {t:'Esta será la lista A.',k:[[0,()=>on('#s4a')]]},
+   {t:'Después, haz lo mismo con la versión nueva y guárdala como lista B.',k:[['versión nueva',()=>on('#s4b')]]}
+ ]},
+ {title:'Paso 1 · Mantén el formato',step:1,cues:[
+   {t:'Un detalle importante: las dos listas deben mantener exactamente el formato de la plantilla original.',rate:EMPH.rate,pitch:EMPH.pitch,k:[[0,()=>on('#s5ban')]]},
+   {t:'No cambies los encabezados, no añadas hojas y no modifiques su estructura.',rate:EMPH.rate,pitch:EMPH.pitch,k:[[0,()=>on('#s5c0')],['no añadas hojas',()=>on('#s5c1')],['no modifiques',()=>on('#s5c2')]]}
+ ]},
+ {title:'Paso 1 · Qué lee la aplicación',step:1,init:()=>{q('#s6xl').innerHTML=excelHTML({file:'lista_A.xlsx',sheet:'ABB_CONNECTION_LIST',cols:TPL_COLS,widths:[190,190,180,190,200],rows:LISTA_A,minRows:9});},cues:[
+   {t:'La aplicación lee la primera hoja y busca esas cinco columnas; si no las encuentra, te avisará y no hará la comparación.',rate:EMPH.rate,pitch:EMPH.pitch,
+    k:[[0,()=>{on('#s6xl');on('#s6first');hl(q('#s6xl .xl-tab'));}],['cinco columnas',()=>{hl(q('#s6xl .xl-tab'),false);on('#s6cols');qa('#s6xl .xh').forEach((c,i)=>later(()=>{c.style.background='#d4edda';},i*160));}],
+       ['si no las encuentra',()=>on('#s6alert')],['no hará',()=>on('#s6no')]]}
+ ]},
+ {title:'Paso 2 · Cargar Lista A y Lista B',step:2,init:()=>mountApp(q('#s7app'),{w:760}),cues:[
+   {t:'Segundo paso: cargar los archivos.',k:[[0,()=>on('#s7h')]]},
+   {t:'Pulsa el botón que hay junto a Lista A y selecciona la versión antigua.',k:[[0,()=>cursorTo(q('#s7app .js-fileA .fbtn'),true)],['selecciona',()=>pickFile('A')]]},
+   {t:'Después, haz lo mismo junto a Lista B con la versión nueva.',k:[['lista b',()=>cursorTo(q('#s7app .js-fileB .fbtn'),true)],['versión nueva',()=>pickFile('B')]]},
+   {t:'Respeta este orden, porque de él depende que un cable aparezca como nuevo o como eliminado.',k:[[0,()=>on('#s7ord')]],
+    pause:3000,onPause:()=>{q('.cursor').classList.remove('show');off('#s7exp');setFile('A');setFile('B');hl(q('#s7app .js-fileA'));hl(q('#s7app .js-fileB'));}}
+ ]},
+ {title:'Paso 3 · Comparar',step:3,init:()=>mountApp(q('#s8app'),{w:1500,fileA:'lista_A.xlsx',fileB:'lista_B.xlsx',results:true,hideRes:true,footer:false}),cues:[
+   {t:'Tercer paso: comparar.',k:[[0,()=>on('#s8h')]]},
+   {t:'Pulsa el botón Comparar versiones.',k:[['pulsa',()=>cursorTo(q('#s8app .js-cmp'),false)],['comparar versiones',()=>{const b=q('#s8app .js-cmp');hl(b);cursorTo(b,true);}]],
+    pause:3000,onPause:()=>{hl(q('#s8app .js-cmp'),false);q('.cursor').classList.remove('show');on('#s8app .js-sum');later(()=>on('#s8app .js-res'),800);}}
+ ]},
+ {title:'Paso 3 · Interpretar el resultado',step:3,init:()=>mountApp(q('#s9app'),{fileA:'lista_A.xlsx',fileB:'lista_B.xlsx',results:true,from:'.js-sum',footer:false}),cues:[
+   {t:'Aparecerá un resumen con los totales y, debajo, una tabla con todos los cables y un código de colores.',
+    k:[['resumen',()=>hl(q('#s9app .summary-container'))],['una tabla',()=>{hl(q('#s9app .summary-container'),false);hl(q('#s9app table'));}],['código de colores',()=>{hl(q('#s9app table'),false);}]]},
+   {t:'En verde claro, los cables que siguen igual.',k:[[0,()=>{on('#s9g');focus9('igual');}]]},
+   {t:'En amarillo, los modificados: mismo origen y destino, pero con otro tipo, color o sección.',k:[[0,()=>{on('#s9y');focus9('modificado');}]]},
+   {t:'En la celda que ha cambiado verás el valor antiguo y el nuevo separados por una flecha; por ejemplo, una sección que pasa de 2,5 a 1,5 milímetros cuadrados.',
+    k:[[0,()=>{on('#s9call');hl(q('#s9app .celda-cambio'));}],['valor antiguo',()=>{pulse(q('#s9old'));pulse(q('#s9app .valor-antiguo'));}],['el nuevo',()=>{pulse(q('#s9new'));pulse(q('#s9app .valor-nuevo'));}],['flecha',()=>pulse(q('#s9arr'))]]},
+   {t:'En azul, los cables nuevos, que solo están en la lista B.',k:[[0,()=>{hl(q('#s9app .celda-cambio'),false);on('#s9b');focus9('nuevo');}]]},
+   {t:'Y en rojo, los eliminados, que solo están en la lista A.',k:[[0,()=>{on('#s9r');focus9('eliminado');}]],pause:300,onPause:()=>focus9(null)}
+ ]},
+ {title:'Paso 3 · Filtrar el resultado',step:3,init:()=>mountApp(q('#s10app'),{fileA:'lista_A.xlsx',fileB:'lista_B.xlsx',results:true,from:'.js-filters'}),cues:[
+   {t:'Para centrarte en lo que te interesa, usa los filtros que hay sobre la tabla: Todos, Modificados, Nuevos, Eliminados y Solo cambios.',
+    k:[['filtros',()=>hl(q('#s10app .js-filters'))],['todos',()=>{hl(q('#s10app .js-filters'),false);f10('todos');}],['modificados',()=>f10('modificado')],['nuevos',()=>f10('nuevo')],['eliminados',()=>f10('eliminado')],['solo cambios',()=>f10('cambios',true)]]},
+   {t:'Este último muestra todas las diferencias y oculta los cables que siguen igual.',k:[[0,()=>{on('#s10note');hl(q('#s10app [data-f="cambios"]'));}]]}
+ ]},
+ {title:'Paso 4 · Exportar a Excel',step:4,init:()=>{mountApp(q('#s11app'),{fileA:'lista_A.xlsx',fileB:'lista_B.xlsx',results:true,filter:'modificado',footer:false});
+    q('#s11xl').innerHTML=excelHTML({file:'Comparativa_Cableado_AAAA-MM-DD_hh-mm-ss.xlsx',sheet:'Comparativa',cols:['ESTADO','ORIGEN','DESTINO','TIPO','COLOR','SECCION'],widths:[150,90,100,105,105,230],rows:EXP_ROWS,bg:EXP_BG,chg:{2:5},autofilter:true,minRows:8});},cues:[
+   {t:'Último paso: exportar.',k:[[0,()=>on('#s11h')]]},
+   {t:'Pulsa Exportar Excel y se descargará un archivo con el resultado, con el estado de cada cable y el mismo código de colores.',
+    k:[[0,()=>{const b=q('#s11app .js-exp');hl(b);cursorTo(b,true);}],['se descargará',()=>{hl(q('#s11app .js-exp'),false);on('#s11dl');}],['con el resultado',()=>{q('.cursor').classList.remove('show');off('#s11dl');on('#s11xl');}],
+       ['el estado',()=>hl(q('#s11xl .xh[data-i="0"]'))],['código de colores',()=>hl(q('#s11xl .xh[data-i="0"]'),false)]]},
+   {t:'Ten en cuenta que el archivo incluye siempre la comparativa completa, como el filtro Todos, aunque en pantalla tengas otro filtro activo.',
+    k:[['comparativa completa',()=>{on('#s11tagB');hl(q('#s11xl .xg'));}],['filtro todos',()=>pulse(q('#s11todos'))],['otro filtro activo',()=>{hl(q('#s11xl .xg'),false);on('#s11tagA');hl(q('#s11app .filtro.activo'));}]],pause:2000}
+ ]},
+ {title:'Resumen',step:5,hold:1800,cues:[
+   {t:'En resumen: descarga la plantilla y rellena una por versión sin alterar su formato.',k:[[0,()=>on('#s12h')],['descarga',()=>on('#s12c0')]]},
+   {t:'Carga la antigua como lista A y la nueva como lista B, pulsa Comparar versiones, filtra los cambios y exporta el resultado.',
+    k:[[0,()=>on('#s12c1')],['pulsa comparar',()=>on('#s12c2')],['filtra los cambios',()=>{const p=q('#s12f');p.style.background='#fff3cd';p.style.borderRadius='6px';pulse(p);}],['exporta',()=>on('#s12c3')]]}
+ ]}
+];
+let pickT=null;
+function pickFile(n){
+  if(pickT){ clearTimeout(pickT); vTimers=vTimers.filter(x=>x!==pickT); pickT=null; }
+  const ex=q('#s7exp'); ex.querySelectorAll('.ex-file').forEach(f=>f.classList.toggle('sel',f.dataset.f===n));
+  ex.querySelector('.ex-n').textContent='lista_'+n+'.xlsx'; on('#s7exp');
+  pickT=later(()=>{pickT=null;off('#s7exp');setFile(n);},1500);
+}
+function setFile(n){ const f=q('#s7app .js-file'+n+' .fname'); if(f) f.textContent='lista_'+n+'.xlsx'; }
+function focus9(e){ const r=q('#s9app .js-res'); if(e) r.setAttribute('data-focus',e); else r.removeAttribute('data-focus'); }
+function f10(f,anim){ setFilter(q('#s10app .app'),f,anim); pulse(q('#s10app [data-f="'+f+'"]')); }
+
+/* ====================================================================
+   PREPARACIÓN: texto de voz, subtítulos, índices y tiempos estimados
+   ==================================================================== */
+const WPM=130, BASE_RATE=0.95, GAP=250;
+function splitSubs(t){
+  if(t.length<=105) return [t];
+  let best=-1,bd=1e9;
+  const re=/[,;:] /g; let m;
+  while((m=re.exec(t))){ const i=m.index+2; if(i<25||t.length-i<25) continue; const d=Math.abs(i-t.length/2); if(d<bd){bd=d;best=i;} }
+  if(best<0) return [t];
+  return splitSubs(t.slice(0,best).trim()).concat(splitSubs(t.slice(best).trim()));
+}
+let TOTAL=0;
+SCENES.forEach((sc,si)=>{
+  sc.start=TOTAL;
+  sc.cues.forEach(c=>{
+    c.v=toVoice(c.t); const lv=c.v.toLowerCase();
+    let from=0;
+    c.trig=(c.k||[]).map(([kw,fn])=>{
+      let idx=0;
+      if(kw){ idx=lv.indexOf(kw.toLowerCase(),from); if(idx<0){console.warn('Clave no encontrada',kw,c.t); idx=from;} from=idx+1; }
+      return {idx,fn};
+    });
+    const parts=splitSubs(c.t); let pf=0;
+    c.subs=parts.map((p,i)=>{ if(i===0) return {idx:0,text:p}; const key=p.slice(0,12).toLowerCase(); let idx=lv.indexOf(key,pf); if(idx<0) idx=Math.round(lv.length*i/parts.length); pf=idx+1; return {idx,text:p}; });
+    c.words=c.t.split(/\s+/).length;
+    c.est=c.words/WPM*60000/((c.rate||1));
+    c.start=TOTAL; TOTAL+=c.est+GAP+(c.pause||0);
+  });
+  TOTAL+=(sc.hold||(sc.cues.length?600:0));
+  sc.end=TOTAL;
+});
+
+/* ====================================================================
+   VOZ
+   ==================================================================== */
+const hasTTS=('speechSynthesis' in window)&&('SpeechSynthesisUtterance' in window);
+let voices=[], voice=null, voiceMode=hasTTS?'auto':'none';
+const sel=document.getElementById('voiceSel');
+function loadVoices(){
+  if(!hasTTS){ sel.innerHTML='<option>Voz no disponible · solo subtítulos</option>'; sel.disabled=true; return; }
+  voices=speechSynthesis.getVoices()||[];
+  const es=voices.filter(v=>/^es([-_]|$)/i.test(v.lang));
+  const other=voices.filter(v=>!/^es([-_]|$)/i.test(v.lang));
+  const saved=localStorage.getItem('cc_voice');
+  let html='';
+  const rank=v=>(/es[-_]ES/i.test(v.lang)?0:1)*10+(/natural|online/i.test(v.name)?0:1);
+  es.sort((a,b)=>rank(a)-rank(b));
+  es.forEach(v=>{html+='<option value="'+v.voiceURI+'">'+v.name+' ('+v.lang+')</option>';});
+  if(!es.length && other.length) other.forEach(v=>{html+='<option value="'+v.voiceURI+'">'+v.name+' ('+v.lang+')</option>';});
+  html+='<option value="__none">Sin voz (solo subtítulos)</option>';
+  sel.innerHTML=html;
+  const pool=es.length?es:other;
+  let pick=null;
+  if(saved==='__none'){ sel.value='__none'; voice=null; voiceMode='none'; return; }
+  if(saved) pick=pool.find(v=>v.voiceURI===saved)||null;
+  if(!pick) pick=pool[0]||null;
+  voice=pick; voiceMode=pick?'auto':(voices.length?'auto':'auto');
+  if(pick) sel.value=pick.voiceURI;
+  document.getElementById('voiceInfo').textContent = es.length? 'Voz en español detectada: '+(pick?pick.name:'') : (voices.length?'No se ha encontrado una voz en español; se usará la disponible.':'Buscando voces del navegador…');
+}
+if(hasTTS){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; } else loadVoices();
+sel.addEventListener('change',()=>{
+  localStorage.setItem('cc_voice',sel.value);
+  if(sel.value==='__none'){voice=null;voiceMode='none';}
+  else {voice=voices.find(v=>v.voiceURI===sel.value)||null;voiceMode='auto';}
+  if(S.playing && S.phase==='speak'){ stopAll(); speakCue(); }
+  sel.blur();
+});
+
+/* ====================================================================
+   MOTOR DE REPRODUCCIÓN
+   ==================================================================== */
+const stage=document.getElementById('stage');
+const scenesEl=Array.from(document.querySelectorAll('.scene'));
+const TPL=scenesEl.map(s=>s.innerHTML);
+const subText=document.getElementById('subText');
+const S={scene:0,cue:0,playing:false,started:false,ended:false,phase:'idle',token:0,fired:new Set(),gapLeft:0,gapEnd:0,clock:0,last:0,utt:null,voiceFails:0};
+let cueTimers=[];
+function ct(fn,ms){const t=setTimeout(fn,ms);cueTimers.push(t);return t;}
+function clearCueTimers(){cueTimers.forEach(clearTimeout);cueTimers=[];}
+function stopAll(){ S.token++; clearCueTimers(); if(hasTTS){ try{speechSynthesis.cancel();}catch(e){} } }
+
+function enterScene(i){
+  stopAll(); clearVisualTimers();
+  S.scene=i; S.cue=0; S.fired=new Set(); S.phase='idle'; S.pauseDone=false;
+  scenesEl.forEach((el,j)=>{ el.classList.toggle('active',j===i); if(j!==i && el.dataset.dirty){ el.innerHTML=TPL[j]; delete el.dataset.dirty; } });
+  ROOT=scenesEl[i]; ROOT.innerHTML=TPL[i]; ROOT.dataset.dirty='1';
+  const sc=SCENES[i];
+  if(sc.init) sc.init();
+  document.getElementById('sceneTitle').textContent=sc.title;
+  document.getElementById('sceneLbl').textContent=(i+1)+' / '+SCENES.length+' · '+sc.title;
+  document.querySelectorAll('.tb-steps span[data-s]').forEach(s=>{const n=+s.dataset.s;s.classList.toggle('cur',n===sc.step);s.classList.toggle('done',n<sc.step);});
+  showSub('');
+  S.clock=sc.start; drawProgress();
+}
+function showSub(t){ subText.textContent=t; subText.classList.toggle('show',!!t); }
+function curCue(){ return SCENES[S.scene].cues[S.cue]; }
+function fireUpTo(ci){
+  const c=curCue(); if(!c) return;
+  c.trig.forEach((tr,i)=>{ if(tr.idx<=ci && !S.fired.has(i)){ S.fired.add(i); try{tr.fn();}catch(e){console.error(e);} } });
+  let sub=c.subs[0]; c.subs.forEach(s=>{ if(s.idx<=ci) sub=s; }); if(subText.textContent!==sub.text) showSub(sub.text);
+}
+function playCue(){
+  const sc=SCENES[S.scene];
+  if(S.cue>=sc.cues.length){
+    S.phase='hold'; showSub('');
+    const hold=sc.hold||(sc.cues.length?600:0);
+    S.gapEnd=Date.now()+hold;
+    ct(()=>{ if(S.scene<SCENES.length-1){ enterScene(S.scene+1); playCue(); } else finish(); },hold);
+    return;
+  }
+  S.fired=new Set(); S.pauseDone=false;
+  S.clock=curCue().start;
+  speakCue();
+}
+function speakCue(){
+  const c=curCue(); const tok=++S.token; S.phase='speak';
+  fireUpTo(0);
+  const useVoice=hasTTS && voiceMode!=='none' && S.voiceFails<3;
+  const est=c.est;
+  const timed=()=>{ // modo temporizado (sin voz o con fallo de voz)
+    c.trig.forEach(tr=>ct(()=>{ if(tok===S.token) fireUpTo(tr.idx); }, est*tr.idx/c.v.length));
+    c.subs.forEach(s=>ct(()=>{ if(tok===S.token) fireUpTo(s.idx); }, est*s.idx/c.v.length));
+    ct(()=>{ if(tok===S.token) endCue(tok); }, est);
+  };
+  if(!useVoice){ timed(); return; }
+  const u=new SpeechSynthesisUtterance(c.v);
+  u.lang=voice?voice.lang:'es-ES'; if(voice) u.voice=voice;
+  u.rate=BASE_RATE*(c.rate||1); u.pitch=c.pitch||1;
+  let started=false, gotB=false;
+  u.onstart=()=>{ if(tok!==S.token) return; started=true; S.voiceFails=0;
+    const real=est; // estimación para disparadores si el navegador no emite eventos de palabra
+    c.trig.concat(c.subs).forEach(tr=>{ if(tr.idx>0) ct(()=>{ if(tok===S.token && !gotB) fireUpTo(tr.idx); }, real*tr.idx/c.v.length); });
+    ct(()=>{ if(tok===S.token){ console.warn('Fin de locución no recibido; se continúa'); endCue(tok);} }, est*2.6+5000);
+  };
+  u.onboundary=e=>{ if(tok!==S.token) return; if(typeof e.charIndex==='number'){ gotB=true; fireUpTo(e.charIndex); } };
+  u.onend=()=>{ if(tok!==S.token) return; endCue(tok); };
+  u.onerror=e=>{ if(tok!==S.token) return; if(e.error==='interrupted'||e.error==='canceled') return;
+    console.warn('Error de voz:',e.error); S.voiceFails++; toast('La voz no está disponible; se continúa con subtítulos'); clearCueTimers(); timed(); };
+  S.utt=u;
+  try{ speechSynthesis.cancel(); }catch(e){}
+  ct(()=>{ if(tok!==S.token) return; try{ speechSynthesis.speak(u); }catch(e){ S.voiceFails++; timed(); } },90);
+  ct(()=>{ if(tok===S.token && !started){ console.warn('La voz no ha comenzado'); S.voiceFails++; if(!(speechSynthesis.getVoices()||[]).length) S.voiceFails=3; try{speechSynthesis.cancel();}catch(e){} toast('La voz no responde; se continúa con subtítulos'); S.token++; const t2=S.token; speakTimedFrom(c,t2); } },4500);
+}
+function speakTimedFrom(c,tok){
+  S.phase='speak';
+  c.trig.forEach(tr=>ct(()=>{ if(tok===S.token) fireUpTo(tr.idx); }, c.est*tr.idx/c.v.length));
+  c.subs.forEach(s=>ct(()=>{ if(tok===S.token) fireUpTo(s.idx); }, c.est*s.idx/c.v.length));
+  ct(()=>{ if(tok===S.token) endCue(tok); }, c.est);
+}
+function endCue(tok){
+  if(tok!==S.token) return;
+  clearCueTimers(); S.token++;
+  fireUpTo(1e9);
+  const c=curCue();
+  if(c.pause) showSub('');
+  if(c.onPause && !S.pauseDone){ S.pauseDone=true; try{c.onPause();}catch(e){console.error(e);} }
+  startGap(GAP+(c.pause||0));
+}
+function startGap(ms){
+  S.phase='gap'; S.gapEnd=Date.now()+ms; S.clock=Math.max(S.clock,curCue().start+curCue().est);
+  const tok=++S.token;
+  ct(()=>{ if(tok!==S.token) return; S.cue++; playCue(); },ms);
+}
+function finish(){
+  S.playing=false; S.ended=true; S.phase='idle'; updatePlayBtn(); showSub('');
+  S.clock=TOTAL; drawProgress();
+  document.getElementById('endOverlay').classList.remove('hidden');
+  stage.classList.remove('idle');
+}
+function play(){
+  if(!S.started){ start(); return; }
+  if(S.ended){ restart(); return; }
+  if(S.playing) return;
+  S.playing=true; updatePlayBtn();
+  if(S.phase==='speak'||S.phase==='idle'){ if(S.phase==='idle'&&S.cue===0) playCue(); else speakCue(); }
+  else if(S.phase==='gap'){ const tok=++S.token; ct(()=>{ if(tok!==S.token) return; S.cue++; playCue(); },Math.max(0,S.gapLeft)); S.gapEnd=Date.now()+S.gapLeft; }
+  else if(S.phase==='hold'){ const tok=++S.token; ct(()=>{ if(tok!==S.token) return; if(S.scene<SCENES.length-1){enterScene(S.scene+1);playCue();} else finish(); },Math.max(0,S.gapLeft)); }
+}
+function pause(){
+  if(!S.playing) return;
+  S.playing=false; updatePlayBtn();
+  if(S.phase==='gap'||S.phase==='hold') S.gapLeft=Math.max(0,S.gapEnd-Date.now());
+  stopAll();
+  stage.classList.remove('idle');
+}
+function toggle(){ S.playing?pause():play(); }
+function goScene(i,autoplay){
+  i=Math.max(0,Math.min(SCENES.length-1,i));
+  document.getElementById('endOverlay').classList.add('hidden'); S.ended=false;
+  const wasPlaying=autoplay!==undefined?autoplay:S.playing;
+  enterScene(i);
+  if(wasPlaying){ S.playing=true; updatePlayBtn(); playCue(); }
+  else { S.playing=false; updatePlayBtn(); }
+}
+function start(){
+  S.started=true; document.getElementById('startOverlay').classList.add('hidden');
+  if(hasTTS){ try{ speechSynthesis.cancel(); }catch(e){} }
+  goScene(0,true);
+}
+function restart(){ S.started=true; document.getElementById('startOverlay').classList.add('hidden'); goScene(0,true); }
+
+/* ====================================================================
+   PROGRESO, CONTROLES Y ESCALADO
+   ==================================================================== */
+const fmt=ms=>{const s=Math.round(ms/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
+const prog=document.getElementById('progress'), progI=prog.querySelector('i');
+SCENES.forEach(sc=>{ if(sc.start>0){ const b=document.createElement('b'); b.style.left=(sc.start/TOTAL*100)+'%'; prog.appendChild(b);} });
+function drawProgress(){
+  progI.style.width=(Math.min(1,S.clock/TOTAL)*100)+'%';
+  document.getElementById('time').textContent=fmt(S.clock)+' / '+fmt(TOTAL)+' (estimado)';
+}
+function tick(now){
+  const dt=S.last?now-S.last:0; S.last=now;
+  if(S.playing){
+    const sc=SCENES[S.scene]; const c=sc.cues[S.cue];
+    let lim;
+    if(S.phase==='speak'&&c) lim=c.start+c.est;
+    else if(S.phase==='gap'&&c) lim=c.start+c.est+GAP+(c.pause||0);
+    else lim=sc.end;
+    S.clock=Math.min(S.clock+dt,lim);
+    drawProgress();
+  }
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+prog.addEventListener('click',e=>{
+  const r=prog.getBoundingClientRect(); const t=(e.clientX-r.left)/r.width*TOTAL;
+  let i=0; SCENES.forEach((sc,j)=>{ if(t>=sc.start) i=j; });
+  if(!S.started){ S.started=true; document.getElementById('startOverlay').classList.add('hidden'); }
+  goScene(i,S.playing||!S.ended);
+});
+function updatePlayBtn(){
+  const b=document.getElementById('bPlay');
+  b.innerHTML=S.playing?'<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>':'<svg viewBox="0 0 24 24"><path d="M7 4v16l13-8z"/></svg>';
+  b.title=S.playing?'Pausa (espacio)':'Reproducir (espacio)';
+}
+function toast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove('show'),2800); }
+function toggleSubs(){ stage.classList.toggle('nosubs'); const off_=stage.classList.contains('nosubs'); document.getElementById('bCC').classList.toggle('off',off_); toast(off_?'Subtítulos desactivados':'Subtítulos activados'); }
+function toggleFS(){
+  const d=document, el=d.documentElement;
+  const fsEl=d.fullscreenElement||d.webkitFullscreenElement;
+  try{
+    if(fsEl){ (d.exitFullscreen||d.webkitExitFullscreen).call(d); }
+    else { const rq=el.requestFullscreen||el.webkitRequestFullscreen; if(!rq) throw new Error('no'); const p=rq.call(el); if(p&&p.catch) p.catch(()=>toast('Pantalla completa no disponible en este contexto')); }
+  }catch(e){ toast('Pantalla completa no disponible en este contexto'); }
+}
+document.getElementById('bPlay').onclick=toggle;
+document.getElementById('bPrev').onclick=()=>{ if(!S.started){start();return;} goScene(S.scene-1); };
+document.getElementById('bNext').onclick=()=>{ if(!S.started){start();return;} goScene(S.scene+1); };
+document.getElementById('bRestart').onclick=restart;
+document.getElementById('bCC').onclick=toggleSubs;
+document.getElementById('bFS').onclick=toggleFS;
+document.getElementById('bStart').onclick=start;
+document.getElementById('bAgain').onclick=restart;
+document.addEventListener('keydown',e=>{
+  if(e.target&&e.target.tagName==='SELECT') return;
+  const k=e.key.toLowerCase();
+  if(k===' '||k==='k'){ e.preventDefault(); toggle(); }
+  else if(k==='arrowright'){ e.preventDefault(); if(S.started) goScene(S.scene+1); }
+  else if(k==='arrowleft'){ e.preventDefault(); if(S.started) goScene(S.scene-1); }
+  else if(k==='r'){ restart(); }
+  else if(k==='c'){ toggleSubs(); }
+  else if(k==='f'){ toggleFS(); }
+  showUI();
+});
+let idleT=null;
+function showUI(){ stage.classList.remove('idle'); clearTimeout(idleT); idleT=setTimeout(()=>{ if(S.playing) stage.classList.add('idle'); },3000); }
+document.addEventListener('mousemove',showUI); document.addEventListener('touchstart',showUI,{passive:true});
+function fit(){
+  const w=window.innerWidth,h=window.innerHeight; const s=Math.min(w/1920,h/1080); STAGE_SCALE=s;
+  stage.style.transform='translate('+((w-1920*s)/2)+'px,'+((h-1080*s)/2)+'px) scale('+s+')';
+}
+window.addEventListener('resize',fit); fit();
+window.addEventListener('pagehide',()=>{ if(hasTTS) try{speechSynthesis.cancel();}catch(e){} });
+document.addEventListener('visibilitychange',()=>{ if(document.hidden && S.playing) pause(); });
+if(!hasTTS) document.getElementById('voiceInfo').textContent='Este navegador no ofrece síntesis de voz: el vídeo se reproducirá con subtítulos.';
+document.getElementById('estDur').textContent=fmt(TOTAL);
+enterScene(0); updatePlayBtn();
+window.__CC={S,SCENES,TOTAL,goScene,enterScene,fireUpTo:(i)=>fireUpTo(i)};
+})();
+</script>
+
+</body></html>
