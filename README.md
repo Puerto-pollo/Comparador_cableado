@@ -9,3 +9,5 @@ Utilizar la plantilla proporcionada por la aplicación para su correcto funciona
 v1.0.0 - Initial version.
 
 v1.1.0 - Added button to download template.
+
+v1.2.0 - Added button that opens a video with instructions how to use the app.
